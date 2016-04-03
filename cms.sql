@@ -1,20 +1,8 @@
--- phpMyAdmin SQL Dump
--- version 4.0.10deb1
--- http://www.phpmyadmin.net
---
--- Client: localhost
--- Généré le: Dim 03 Avril 2016 à 18:15
--- Version du serveur: 5.5.47-0ubuntu0.14.04.1
--- Version de PHP: 5.6.19-1+deb.sury.org~trusty+1
+
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
 
 --
 -- Base de données: `cms`
@@ -53,15 +41,6 @@ CREATE TABLE IF NOT EXISTS `news` (
   `dateModif` datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
-
---
--- Contenu de la table `news`
---
-
-INSERT INTO `news` (`id`, `auteur`, `titre`, `contenu`, `dateAjout`, `dateModif`) VALUES
-(2, 'dfgdfgd', 'fgdfsgdf', 'gdfsg', '2016-03-23 00:00:00', '2016-03-26 00:00:00'),
-(4, 'dsfdsf', 'ghjghfjcxxwvc', 'fsdqfsdqf', '2016-03-13 14:34:34', '2016-03-13 14:34:39'),
-(5, 'aaaaaaaaaaaaa', 'gfdgs', 'fdsfgdsfgfdsgdfs', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
