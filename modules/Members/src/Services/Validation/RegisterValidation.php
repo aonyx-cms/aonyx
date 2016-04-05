@@ -7,43 +7,63 @@
 
 namespace Modules\Members\Services;
 
-
-use Aonyx\Abstracts\AbstractRegisterValidation;
+use Aonyx\Abstracts\AbstractMembersValidation;
+use Aonyx\Classes\Application;
 
 /**
  * Class RegisterService
  * @package Modules\Members\Services
  */
-class RegisterValidation extends AbstractRegisterValidation
+class RegisterValidation extends AbstractMembersValidation
 {
+    private $_oApp;
+
+    /**
+     * Set les champs requis
+     * @param array $aData
+     * @return array
+     */
+    private function _setRequiredFields(array $aData)
+    {
+        $aReturn = [
+            'username' => $aData['username'],
+            'email' => $aData['email'],
+            'password' => $aData['password'],
+            'confirmPassword' => $aData['confirmPassword'],
+            'captcha' => $aData['captcha'],
+            'token' => $aData['token']
+        ];
+        return $aReturn;
+    }
+
+    /**
+     * Récupère un token pour la validation de l'inscription
+     * @return $this
+     */
+    public function getToken()
+    {
+        $this->_oApp = new Application();
+        return $this->_oApp->generateToken(37);
+    }
+
     /**
      * Fonction de validation qui vérifie que tout soit ok pour passer le form
-     * @param $aPost
+     * @param $aData
      * @return bool
      */
-    public function isValid($aPost)
+    public function isValid(array $aData)
     {
 
-        if($aPost) {
+        if(!empty($aData)) {
 
-            // On défini les champs obligatoire
-            $aRequiredField = [
-                'username' => $aPost['username'],
-                'email' => $aPost['email'],
-                'password' => $aPost['password'],
-                'confirmPassword' => $aPost['confirmPassword'],
-                'captcha' => $aPost['captcha'],
-                'token' => $aPost['token']
-            ];
-
-            $this->requiredFields($aRequiredField); // Vérifie que tout les champs requis soit renseigné
-            $this->validUsername($aPost['username']); // Vérifie si le username est valide
-            $this->isAlpha($aPost['username']); // Vérifie si c'est bien alphanumérique
-            //$this->isUniq($aPost['username']); // Vérifie si il existe pas déjà
-            $this->validEmail($aPost['email']); // Vérifie si le format d'email est valide
-            //$this->isUniq($aPost['email']); // Vérifie si l'email existe pas déjà
-            $this->passwordMatching(md5($aPost['password']), md5($aPost['confirmPassword'])); // Vérifie si les champs password et passwordConfirm matches
-            $this->captcha($aPost['captcha']); // Vérifie si le captcha correspond bien à celui généré en session
+            $this->requiredFields($this->_setRequiredFields($aData)); // Vérifie que tout les champs requis soit renseigné
+            $this->validUsername($aData['username']); // Vérifie si le username est valide
+            $this->isAlpha($aData['username']); // Vérifie si c'est bien alphanumérique
+            //$this->isUniq($aData['username']); // Vérifie si il existe pas déjà
+            $this->validEmail($aData['email']); // Vérifie si le format d'email est valide
+            //$this->isUniq($aData['email']); // Vérifie si l'email existe pas déjà
+            $this->passwordMatching(md5($aData['password']), md5($aData['confirmPassword'])); // Vérifie si les champs password et passwordConfirm matches
+            $this->captcha($aData['captcha']); // Vérifie si le captcha correspond bien à celui généré en session
 
             // Si il n'y a pas d'erreur et que tout va bien on retourne vrai pour passer à la suite
             if(null == $this->getErrors()) {
@@ -55,16 +75,5 @@ class RegisterValidation extends AbstractRegisterValidation
         return false;
     }
 
-    /**
-     * Crée un token pour la validation de l'inscription
-     * @return string
-     */
-    public function getToken()
-    {
-        $length = 37;
-        $alphabet = "0123456789azertyuiopqsdfghjklmwxcvbnAZERTYUIOPQSDFGHJKLMWXCVBN";
-
-        return substr(str_shuffle(str_repeat($alphabet, $length)), 0, $length);
-    }
 
 }

@@ -7,14 +7,15 @@
 
 namespace Modules\Members\Services;
 
+use Aonyx\Abstracts\AbstractMembersValidation;
 
-use Aonyx\Abstracts\AbstractLoginValidation;
-
-class LoginValidation extends AbstractLoginValidation
+class LoginValidation extends AbstractMembersValidation
 {
-    public function isValid($aPost)
+    public function isValid(array $aData)
     {
+        if(!empty($aData)) {
 
+        }
     }
 
 }

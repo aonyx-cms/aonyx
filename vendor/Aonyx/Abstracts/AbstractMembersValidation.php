@@ -13,7 +13,7 @@ use Aonyx\Interfaces\InterfaceValidation;
  * Class AbstractValidation
  * @package Aonyx\Abstracts
  */
-abstract class AbstractRegisterValidation implements InterfaceValidation
+abstract class AbstractMembersValidation implements InterfaceValidation
 {
     private $aErrors = [];
     private $aSuccess = [];
