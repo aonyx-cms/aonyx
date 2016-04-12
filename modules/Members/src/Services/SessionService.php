@@ -11,4 +11,13 @@ namespace Modules\Members\Services;
 class SessionService
 {
 
+    //todo : créer un service d'authentification
+    public function createSession() {
+
+        if (isset($_POST['email']) && isset($_POST['password']))
+        {
+            $_SESSION['email'] = $_POST['email'];
+        }
+
+    }
 }

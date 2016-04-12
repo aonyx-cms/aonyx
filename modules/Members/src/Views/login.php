@@ -3,14 +3,24 @@
         <h3 class="panel-title">Se connecter</h3>
     </div>
     <div class="panel-body">
-        <form>
+        <form method="post" action="index.php?module=members&action=login">
             <div class="form-group">
                 <label for="email">Adresse Email</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email" autofocus>
+                <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Email" autofocus>
+                <?php
+                if(isset($return['errors']['email'])) {
+                    echo '<br /><div class="alert alert-' . $return['errors']['email'][0] . '" role="alert">' . $return['errors']['email'][1] . '</div>';
+                }
+                ?>
             </div>
             <div class="form-group">
                 <label for="password">Mot de passe</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                <?php
+                if(isset($return['errors']['password'])) {
+                    echo '<br /><div class="alert alert-' . $return['errors']['password'][0] . '" role="alert">' . $return['errors']['password'][1] . '</div>';
+                }
+                ?>
             </div>
             <div class="checkbox">
                 <label>

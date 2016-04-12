@@ -112,7 +112,7 @@ class UserEntity
      */
     public function setPassword($password)
     {
-        $this->_password = $password;
+        $this->_password = crypt($password);
         return $this;
     }
 

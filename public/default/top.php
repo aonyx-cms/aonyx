@@ -30,14 +30,15 @@
             <h3 class="panel-title">Espace Membre</h3>
         </div>
         <div class="panel-body">
+            <?php if (!isset($_SESSION['email'])) { ?>
             <form method="post" action="index.php?module=members&action=login">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Adresse email</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Adresse email">
+                    <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Adresse email">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">Mot de passe</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Mot de passe">
+                    <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Mot de passe">
                 </div>
                 <div class="checkbox">
                     <label>
@@ -50,6 +51,13 @@
                 <li><a href="index.php?module=members&action=register">S'enregistrer</a></li>
                 <li><a href="index.php?module=members&action=login">Se connecter</a></li>
             </ul>
+            <?php } else { ?>
+            Bonjour <?php echo $_SESSION['email']; ?>
+                <ul>
+                    <li><a href="index.php?module=members&action=account">Espace membre</a></li>
+                    <li><a href="index.php?module=members&action=logout">Se déconnecter</a></li>
+                </ul>
+            <?php } ?>
         </div>
     </div>
 

@@ -12,11 +12,17 @@ use Aonyx\Classes\DbManager;
 class UserRepository extends DbManager
 {
 
+    /**
+     * @param $db
+     */
     public function init($db)
     {
         $this->setDb($db);
     }
 
+    /**
+     *
+     */
     public function createUser()
     {
 
@@ -37,13 +43,21 @@ class UserRepository extends DbManager
         ));
     }
 
+    /**
+     * @return mixed
+     */
     public function getUsers()
     {
-
         // Récupère la liste des utilisateurs
         return $this->fetchAll('username', 'users', null, null, null, 'Users');
     }
 
+    /**
+     * @return mixed
+     */
+    public function fetchUserByEmail() {
+        return $this->fetch('*', 'users', 'email = (?)', $_POST['email'], 'Users');
+    }
 
 
 }

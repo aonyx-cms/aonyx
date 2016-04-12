@@ -23,6 +23,10 @@ $routes = [
         'namespace' => '\Modules\Members\Controllers\MembersController',
         'action' => 'loginAction'
     ],
+    'logout' => [
+        'namespace' => '\Modules\Members\Controllers\MembersController',
+        'action' => 'logoutAction'
+    ],
     'register' => [
         'namespace' => '\Modules\Members\Controllers\MembersController',
         'action' => 'registerAction'

@@ -6,7 +6,10 @@
  */
 
 namespace Aonyx\Abstracts;
+
 use Aonyx\Interfaces\InterfaceValidation;
+use Config\Database;
+use Modules\Members\Models\UserRepository;
 
 /**
  * Défini les controlles de validation récurrents
@@ -17,6 +20,13 @@ abstract class AbstractMembersValidation implements InterfaceValidation
 {
     private $aErrors = [];
     private $aSuccess = [];
+    private $_oUserRepository = null;
+
+    public function __construct()
+    {
+        $this->_oUserRepository = new UserRepository();
+        $this->_oUserRepository->init(Database::connect());
+    }
 
     /**
      * @param $email
@@ -108,6 +118,22 @@ abstract class AbstractMembersValidation implements InterfaceValidation
             if($_SESSION['captcha'] != $value) {
                 $this->aErrors['captcha'] = ['danger', 'Le captcha n\'est pas bon.'];
             }
+        }
+    }
+
+    public function isFetchEmail() {
+
+        if(!$this->_oUserRepository->fetchUserByEmail())
+        {
+            $this->aErrors['email'] = ['danger', 'Cet utilisateur n\'existe pas !'];
+        }
+    }
+
+    public function isFetchPasswordMatching()
+    {
+        if(crypt($_POST['password'], $this->_oUserRepository->fetchUserByEmail()['password']) != $this->_oUserRepository->fetchUserByEmail()['password'])
+        {
+            $this->aErrors['password'] = ['danger', 'Le mot de passe est pas bon !'];
         }
     }
 
