@@ -50,7 +50,7 @@ class MembersController extends AbstractController
 
             if($oValidation->isValid($_POST)) {
 
-                $oSession->createSession();
+                $oSession->connect();
 
                 $this->render(
                     [],
@@ -117,7 +117,6 @@ class MembersController extends AbstractController
                 $this->render(
                     [
                         'errors' => $oValidation->getErrors(), // Pour afficher les erreurs
-                        //'success' => $oValidation->getSuccess(), // Pour afficher les success
                         'token' => $oValidation->getToken(), // Récupère le token généré automatiquement
                         'users' => $oUserRepository->getUsers(), // Liste des utilisateurs
                     ],

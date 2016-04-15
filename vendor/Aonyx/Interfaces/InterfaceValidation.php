@@ -15,6 +15,5 @@ interface InterfaceValidation
     public function requiredFields(array $required);
     public function isAlpha($field);
     public function getErrors();
-    public function getSuccess();
 
 }

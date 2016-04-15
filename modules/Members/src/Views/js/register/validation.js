@@ -1,27 +1,53 @@
 jQuery(document).ready(function() {
 
-    jQuery('#username').mouseleave(function() {
-        //jQuery('#username').val('Ta quitté');
-        var msg = '',
-            ajax = jQuery.ajax({
+    /**
+     * Fonction : Requête AJAX
+     * @param _urlActionController
+     * @param _methodType
+     * @param _attachment
+     * @param _dataType
+     * @param _appendTo
+     * @private
+     */
+    var _ajaxRequest = function (_urlActionController, _methodType, _attachment, _dataType, _appendTo) {
 
-            url: 'index.php?module=members&action=ajax_validation',
-            type: 'POST',
-            data: {username: jQuery('#username').val()},
-            dataType: "json"
+        ajax = jQuery.ajax({
+            url: _urlActionController,
+            type: _methodType,
+            data: { attachment:jQuery(_attachment).val()  },
+            dataType: _dataType
         });
 
         ajax.done(function(data){
-            msg = data.responseText;
+
+            var htmlResponse = jQuery(data).find('#middle').html();
+
+            if('' != htmlResponse) {
+                jQuery(_appendTo).html(htmlResponse);
+            } else {
+                jQuery(_appendTo).html('');
+            }
+
         });
 
-        console.log(msg);
+    };
+
+    /**
+     * Event si on quitte le focus du champ username
+     * on déclenche une requête en AJAX
+     */
+    jQuery('#username').focusout(function() {
+
+        _ajaxRequest('index.php?module=members&action=ajax_validation_username', 'POST', '#username', 'html', '#ajax-username');
     });
 
+    /**
+     * Event si on quitte le focus du champ username
+     * on déclenche une requête en AJAX
+     */
+    jQuery('#email').focusout(function() {
 
-
-    //jQuery('#username').mouseenter(function() {
-    //    jQuery('#username').val('T\'es entré');
-    //});
+        _ajaxRequest('index.php?module=members&action=ajax_validation_email', 'POST', '#email', 'html', '#ajax-email');
+    });
 
 });

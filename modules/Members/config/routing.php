@@ -43,9 +43,14 @@ $routes = [
     /**
      * Routes des controllers Ajax
      */
-    'ajax_validation' => [
+    'ajax_validation_username' => [
         'namespace' => '\Modules\Members\Controllers\AjaxMembersController',
-        'action' => 'ajaxValid'
+        'action' => 'getUsername'
+    ],
+
+    'ajax_validation_email' => [
+        'namespace' => '\Modules\Members\Controllers\AjaxMembersController',
+        'action' => 'getEmail'
     ]
 
 ];

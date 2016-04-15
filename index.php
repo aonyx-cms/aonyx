@@ -6,16 +6,15 @@
  */
 
 /**
- * Démarre une session d'office pour l'objet session
- */
-session_start();
-
-/**
  * Pile d'autoload
  */
 include_once "config/autoload.php";
 use Config\Autoloader;
+use Config\Session;
+
 Autoloader::register();
+Session::getInstance();
+
 include_once "config/routing.php";
 
 /**

@@ -31,6 +31,7 @@ class Template
      *
      */
     public function body() {
+        ob_start();
         include_once 'public/' . $this->getTemplate() . '/header/index.php';
         include_once 'public/' . $this->getTemplate() . '/top.php';
 
@@ -54,8 +55,11 @@ class Template
             include_once 'modules/Application/Application.php';
         }
 
+
         include_once 'public/' . $this->getTemplate() . '/bottom.php';
         include_once 'public/' . $this->getTemplate() . '/footer/index.php';
+        $content = ob_get_clean();
+        echo $content;
     }
 
     /**

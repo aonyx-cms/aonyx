@@ -8,15 +8,18 @@
 namespace Modules\Members\Services;
 
 
+use Config\Session;
+
 class SessionService
 {
-
-    //todo : créer un service d'authentification
-    public function createSession() {
+    /**
+     * Connexion User
+     */
+    public function connect() {
 
         if (isset($_POST['email']) && isset($_POST['password']))
         {
-            $_SESSION['email'] = $_POST['email'];
+            Session::write('email', $_POST['email']);
         }
 
     }

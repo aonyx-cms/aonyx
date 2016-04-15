@@ -19,7 +19,6 @@ use Modules\Members\Models\UserRepository;
 abstract class AbstractMembersValidation implements InterfaceValidation
 {
     private $aErrors = [];
-    private $aSuccess = [];
     private $_oUserRepository = null;
 
     public function __construct()
@@ -39,12 +38,8 @@ abstract class AbstractMembersValidation implements InterfaceValidation
         }
 
         // Vérifie la chaine
-        if(preg_match('#^[\w.-]+@[\w.-]+\.[a-z]{2,6}$#i', $email))
-        {
-            $this->aSuccess['email'] = ['success', 'Votre adresse mail est valide !'];
-        }
-        else
-        {
+        if(!preg_match('#^[\w.-]+@[\w.-]+\.[a-z]{2,6}$#i', $email)) {
+
             $this->aErrors['email'] = ['danger', 'L\'email n\'est pas valide !'];
         }
     }
@@ -58,10 +53,8 @@ abstract class AbstractMembersValidation implements InterfaceValidation
         // Vérifie que les mot de passe correspond
         if(null != $password && null != $confirmPassword) {
 
-            if($confirmPassword === $password)
+            if($confirmPassword !== $password)
             {
-                $this->aSuccess['password'] = ['success', 'Les mots de passe concordent.'];
-            } else {
 
                 $this->aErrors['password'] = ['danger', 'Les mots de passe ne concordent pas !'];
             }
@@ -125,6 +118,7 @@ abstract class AbstractMembersValidation implements InterfaceValidation
 
         if(!$this->_oUserRepository->fetchUserByEmail())
         {
+
             $this->aErrors['email'] = ['danger', 'Cet utilisateur n\'existe pas !'];
         }
     }
@@ -133,6 +127,7 @@ abstract class AbstractMembersValidation implements InterfaceValidation
     {
         if(crypt($_POST['password'], $this->_oUserRepository->fetchUserByEmail()['password']) != $this->_oUserRepository->fetchUserByEmail()['password'])
         {
+
             $this->aErrors['password'] = ['danger', 'Le mot de passe est pas bon !'];
         }
     }
@@ -143,14 +138,6 @@ abstract class AbstractMembersValidation implements InterfaceValidation
     public function getErrors()
     {
         return $this->aErrors;
-    }
-
-    /**
-     * @return array
-     */
-    public function getSuccess()
-    {
-        return $this->aSuccess;
     }
 
 }

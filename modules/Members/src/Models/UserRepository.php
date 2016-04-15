@@ -34,12 +34,13 @@ class UserRepository extends DbManager
         $this->setDb($this->getDb());
 
         //Insertion en base de données
-        $this->insert("users", "'', (?), (?), (?), NOW(), (?), (?)", array(
+        $this->insert("users", "'', (?), (?), (?), NOW(), (?), (?), (?)", array(
             $entity->getUsername(),
             $entity->getEmail(),
             $entity->getPassword(),
             $entity->getToken(),
             false,
+            null
         ));
     }
 
@@ -53,11 +54,18 @@ class UserRepository extends DbManager
     }
 
     /**
+     * @param null $specificPost
      * @return mixed
      */
-    public function fetchUserByEmail() {
-        return $this->fetch('*', 'users', 'email = (?)', $_POST['email'], 'Users');
+    public function fetchUserByEmail($specificPost = null) {
+        return $this->fetch('*', 'users', 'email = (?)', (null != $specificPost ? $specificPost : $_POST['email']), 'Users');
     }
 
-
+    /**
+     * @param null $specificPost
+     * @return mixed
+     */
+    public function fetchUserByUsername($specificPost = null) {
+        return $this->fetch('*', 'users', 'username = (?)', (null != $specificPost ? $specificPost : $_POST['username']), 'Users');
+    }
 }

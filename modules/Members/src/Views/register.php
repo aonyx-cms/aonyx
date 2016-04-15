@@ -12,22 +12,16 @@
                 if(isset($return['errors']['username'])) {
                     echo '<br /><div class="alert alert-' . $return['errors']['username'][0] . '" role="alert">' . $return['errors']['username'][1] . '</div>';
                 }
-                //todo : faire un appel ajax pour la validation success en direct IDEM pour les autres en dessous !!
-//                if(isset($return['success']['username'])) {
-//                    echo '<br /><div class="alert alert-' . $return['success']['username'][0] . '" role="alert">' . $return['success']['username'][1] . '</div>';
-//                }
                 ?>
             </div>
             <div class="form-group">
                 <label for="email">Choisir une adresse Email</label>
                 <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+                <div id="ajax-email"></div>
                 <?php
                 if(isset($return['errors']['email'])) {
                     echo '<br /><div class="alert alert-' . $return['errors']['email'][0] . '" role="alert">' . $return['errors']['email'][1] . '</div>';
                 }
-//                if(isset($return['success']['email'])) {
-//                    echo '<br /><div class="alert alert-' . $return['success']['email'][0] . '" role="alert">' . $return['success']['email'][1] . '</div>';
-//                }
                 ?>
             </div>
             <div class="form-group">
@@ -37,9 +31,6 @@
                 if(isset($return['errors']['password'])) {
                     echo '<br /><div class="alert alert-' . $return['errors']['password'][0] . '" role="alert">' . $return['errors']['password'][1] . '</div>';
                 }
-//                if(isset($return['success']['password'])) {
-//                    echo '<br /><div class="alert alert-' . $return['success']['password'][0] . '" role="alert">' . $return['success']['password'][1] . '</div>';
-//                }
                 ?>
             </div>
             <div class="form-group">
@@ -49,9 +40,6 @@
                 if(isset($return['errors']['confirmPassword'])) {
                     echo '<br /><div class="alert alert-' . $return['errors']['confirmPassword'][0] . '" role="alert">' . $return['errors']['confirmPassword'][1] . '</div>';
                 }
-//                if(isset($return['success']['confirmPassword'])) {
-//                    echo '<br /><div class="alert alert-' . $return['success']['confirmPassword'][0] . '" role="alert">' . $return['success']['confirmPassword'][1] . '</div>';
-//                }
                 ?>
             </div>
             <div class="form-group">
@@ -62,9 +50,6 @@
                 if(isset($return['errors']['captcha'])) {
                     echo '<br /><div class="alert alert-' . $return['errors']['captcha'][0] . '" role="alert">' . $return['errors']['captcha'][1] . '</div>';
                 }
-//                if(isset($return['success']['captcha'])) {
-//                    echo '<br /><div class="alert alert-' . $return['success']['captcha'][0] . '" role="alert">' . $return['success']['captcha'][1] . '</div>';
-//                }
                 ?>
             </div>
             <input type="hidden" name="token" value="<?php echo $return['token']; ?>" />

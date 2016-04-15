@@ -24,7 +24,7 @@
             </div>
             <div class="checkbox">
                 <label>
-                    <input type="checkbox"> Se souvenir de moi ?
+                    <input name="remember" type="checkbox"> Se souvenir de moi ?
                 </label>
             </div>
             <button type="submit" class="btn btn-default">Me connecter</button>

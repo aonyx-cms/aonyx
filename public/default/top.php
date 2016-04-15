@@ -71,4 +71,4 @@
         </div>
     </div>
 </div>
-<div class="col-md-6">
+<div class="col-md-6" id="middle">
