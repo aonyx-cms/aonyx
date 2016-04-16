@@ -25,11 +25,11 @@ $config = new Config();
 $config->fetchConfigSite();
 
 /**
- * Templates
+ * Construction du site
  */
-use Config\Template;
-$template = new Template($config->getTemplate(), $modules, $config);
-$template->body();
+use Config\Router;
+$page = new Router($config->getTemplate(), $modules);
+echo $page->body();
 
 
 

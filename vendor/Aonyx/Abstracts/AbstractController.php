@@ -3,6 +3,7 @@ namespace Aonyx\Abstracts;
 
 use Aonyx\Classes\DbManager;
 use Aonyx\Interfaces\InterfaceController;
+use Config\Config;
 use Config\Database;
 
 /**
@@ -50,6 +51,10 @@ abstract class AbstractController implements InterfaceController
         foreach($return as $variableOut => $variableIn) {
             ${$variableOut} = $variableIn;
         }
+
+        // Configurations générales du site
+        $config = new Config();
+        $config->fetchConfigSite();
 
         // Rend la vue
         if(file_exists($path)) {
@@ -152,5 +157,4 @@ abstract class AbstractController implements InterfaceController
     {
         return new DbManager();
     }
-
 }

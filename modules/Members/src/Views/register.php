@@ -1,3 +1,4 @@
+<?php include_once 'templates/' . $config->getTemplate() . '/Views/header.php'; ?>
 <div class="panel panel-warning">
     <div class="panel-heading">
         <h3 class="panel-title">S'enregistrer</h3>
@@ -59,4 +60,4 @@
 </div>
 
 <script src="modules/Members/src/Views/js/register/validation.js"></script>
-
+<?php include_once 'templates/' . $config->getTemplate() . '/Views/footer.php'; ?>

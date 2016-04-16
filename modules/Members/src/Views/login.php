@@ -1,4 +1,5 @@
-<div class="panel panel-primary">
+<?php include_once 'templates/' . $config->getTemplate() . '/Views/header.php'; ?>
+    <div class="panel panel-primary">
     <div class="panel-heading">
         <h3 class="panel-title">Se connecter</h3>
     </div>
@@ -31,4 +32,4 @@
         </form>
     </div>
 </div>
-
+<?php include_once 'templates/' . $config->getTemplate() . '/Views/footer.php'; ?>

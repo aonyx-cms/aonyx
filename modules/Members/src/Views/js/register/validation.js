@@ -20,10 +20,8 @@ jQuery(document).ready(function() {
 
         ajax.done(function(data){
 
-            var htmlResponse = jQuery(data).find('#middle').html();
-
-            if('' != htmlResponse) {
-                jQuery(_appendTo).html(htmlResponse);
+            if('' != data) {
+                jQuery(_appendTo).html(data);
             } else {
                 jQuery(_appendTo).html('');
             }
