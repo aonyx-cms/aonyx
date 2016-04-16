@@ -7,26 +7,22 @@
 
 namespace Config;
 
-
+/**
+ * Class Router
+ * @package Config
+ */
 class Router
 {
-
-    private $_sRouteHeader = null;
-    private $_sRouteFooter = null;
     private $_aRouting = array();
 
     /**
-     * Template constructor.
-     * Détermine la location des vues du template par rapport au template
-     * séléctionné en base
+     * Routing constructor.
      * @param $sTemplate
      * @param array $aRouting
      */
     public function __construct($sTemplate, array $aRouting)
     {
         $this->_aRouting = $aRouting;
-        $this->_sRouteHeader = 'templates/' . $sTemplate . 'Views/header.php';
-        $this->_sRouteFooter = 'templates/' . $sTemplate . 'Views/footer.php';
     }
 
     /**
@@ -63,21 +59,5 @@ class Router
 
         $content = ob_get_clean();
         return $content;
-    }
-
-    /**
-     * Retourne le chemin d'accès vers le header du template en cours
-     * @return null|string
-     */
-    public function getHeader() {
-        return $this->_sRouteHeader;
-    }
-
-    /**
-     * Retourne le chemin d'accès vers le footer du template en cours
-     * @return null|string
-     */
-    public function getFooter() {
-        return $this->_sRouteFooter;
     }
 }
