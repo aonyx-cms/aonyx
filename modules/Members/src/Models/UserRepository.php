@@ -8,16 +8,17 @@
 namespace Modules\Members\Models;
 
 use Aonyx\Classes\DbManager;
+use Config\Database;
 
 class UserRepository extends DbManager
 {
 
-    /**
-     * @param $db
-     */
-    public function init($db)
+    private $_oDb = null;
+
+    public function __construct()
     {
-        $this->setDb($db);
+        $this->_oDb = Database::connect();
+        $this->setDb($this->_oDb);
     }
 
     /**

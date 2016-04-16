@@ -7,13 +7,20 @@
 
 namespace Modules\Members\Controllers;
 
-
 use Aonyx\Abstracts\AbstractController;
 use Modules\Members\Models\UserRepository;
 
+/**
+ * Class MembersController
+ * @package Modules\Members\Controllers
+ */
 class MembersController extends AbstractController
 {
 
+    /**
+     * Action sur l'index du module Members
+     * @throws \Exception
+     */
     public function indexAction()
     {
         // Charge le fichier de config services.config.php dans le dossier config de Members
@@ -31,6 +38,10 @@ class MembersController extends AbstractController
         );
     }
 
+    /**
+     * Action de connexion d'un utilisateur
+     * @throws \Exception
+     */
     public function loginAction()
     {
         // Charge le fichier de config services.config.php dans le dossier config de Members
@@ -71,6 +82,7 @@ class MembersController extends AbstractController
     }
 
     /**
+     * Actions d'enregistrement d'un nouveau membre
      * @throws \Exception
      */
     public function registerAction()
@@ -87,8 +99,9 @@ class MembersController extends AbstractController
         $oService = $this->getService();
 
         //@todo : dans le service register
+        //@todo :       -> puis ne plus avoir à refaire un init() pour chaque appel a un repository, charger automatiquement la base de données
         $oUserRepository = new UserRepository();
-        $oUserRepository->init($this->getDatabase());
+//        $oUserRepository->init($this->getDatabase());
 
         if(isset($_POST)) {
 
@@ -127,6 +140,10 @@ class MembersController extends AbstractController
 
     }
 
+    /**
+     * Action mot de passe oublié
+     * @throws \Exception
+     */
     public function forgetAction()
     {
         $this->render(
@@ -135,6 +152,10 @@ class MembersController extends AbstractController
         );
     }
 
+    /**
+     * Action sur la page d'espace membre
+     * @throws \Exception
+     */
     public function accountAction()
     {
         $this->render(
@@ -143,6 +164,10 @@ class MembersController extends AbstractController
         );
     }
 
+    /**
+     * Action de déconnexion
+     * @throws \Exception
+     */
     public function logoutAction()
     {
         unset($_SESSION['email']);

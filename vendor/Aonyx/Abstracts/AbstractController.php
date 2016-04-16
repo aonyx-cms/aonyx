@@ -13,11 +13,15 @@ use Config\Database;
 
 abstract class AbstractController implements InterfaceController
 {
+    //@todo : constant pour les réponses
+
     protected $_oService;
     protected $_oServiceConfig;
     protected $_oConfig;
     protected $_oManager;
     protected $_oValidation;
+
+    //@todo : commenter les méthodes
 
     public function getDatabase()
     {

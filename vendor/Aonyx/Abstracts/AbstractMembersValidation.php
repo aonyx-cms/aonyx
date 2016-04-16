@@ -18,13 +18,14 @@ use Modules\Members\Models\UserRepository;
  */
 abstract class AbstractMembersValidation implements InterfaceValidation
 {
+    //@todo : faire des constants pour tout les messages d'erreurs et les types d'erreurs ainsi que leurs clés correspondantes
+
     private $aErrors = [];
     private $_oUserRepository = null;
 
     public function __construct()
     {
         $this->_oUserRepository = new UserRepository();
-        $this->_oUserRepository->init(Database::connect());
     }
 
     /**

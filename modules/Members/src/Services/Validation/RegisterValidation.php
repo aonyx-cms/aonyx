@@ -62,7 +62,7 @@ class RegisterValidation extends AbstractMembersValidation
             //$this->isUniq($aData['username']); // Vérifie si il existe pas déjà
             $this->validEmail($aData['email']); // Vérifie si le format d'email est valide
             //$this->isUniq($aData['email']); // Vérifie si l'email existe pas déjà
-            $this->passwordMatching(md5($aData['password']), md5($aData['confirmPassword'])); // Vérifie si les champs password et passwordConfirm matches
+            $this->passwordMatching(crypt($aData['password'], $aData['password']), crypt($aData['confirmPassword'], $aData['confirmPassword'])); // Vérifie si les champs password et passwordConfirm matches @todo : VIRER le cryptage md5
             $this->captcha($aData['captcha']); // Vérifie si le captcha correspond bien à celui généré en session
 
             // Si il n'y a pas d'erreur et que tout va bien on retourne vrai pour passer à la suite

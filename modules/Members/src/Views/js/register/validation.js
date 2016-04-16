@@ -42,7 +42,7 @@ jQuery(document).ready(function() {
     });
 
     /**
-     * Event si on quitte le focus du champ username
+     * Event si on quitte le focus du champ email
      * on déclenche une requête en AJAX
      */
     jQuery('#email').focusout(function() {
