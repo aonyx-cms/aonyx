@@ -8,7 +8,7 @@
 namespace Modules\Members\Controllers;
 
 use Aonyx\Abstracts\AbstractController;
-use Modules\Members\Models\UserRepository;
+use Config\Session;
 
 /**
  * Class MembersController
@@ -26,16 +26,20 @@ class MembersController extends AbstractController
         // Charge le fichier de config services.config.php dans le dossier config de Members
         $this->setConfig('services', 'Members');
 
-        // Set les services en question : ici le service RegisterService
-        $this->setService($this->getConfig(), 'session');
+        // Set les services en question : ici le service SessionService
+        $this->setService($this->getConfig(), 'sessionService');
 
         // Récupère le service de login
-        $oService = $this->getService();
+        $oSession = $this->getService();
 
-        $this->render(
-            [],
-            'modules/Members/src/Views/index.php'
-        );
+        // Vérifie si l'utilisateur est connecté
+        if($oSession->isConnected()) {
+
+            $this->redirect('members', 'account'); // Redirection sur la page d'espace membre
+        } else {
+
+            $this->redirect('members', 'login'); // Redirection sur la page de login
+        }
     }
 
     /**
@@ -58,18 +62,18 @@ class MembersController extends AbstractController
         $oSession = $this->getService();
 
         if(isset($_POST)) {
-
+            // Si le form est valide
             if($oValidation->isValid($_POST)) {
-
+                // On connecte l'utilisateur
                 $oSession->connect();
-
+                // Rend la vue de l'espace membre
                 $this->render(
                     [],
                     'modules/Members/src/Views/account.php'
                 );
 
             } else {
-
+                // Sinon rend la vue de Login avec les erreurs
                 $this->render(
                     [
                         'errors' => $oValidation->getErrors(), // Pour afficher les erreurs
@@ -98,26 +102,15 @@ class MembersController extends AbstractController
         $oValidation = $this->getValidation();
         $oService = $this->getService();
 
-        //@todo : dans le service register
-        //@todo :       -> puis ne plus avoir à refaire un init() pour chaque appel a un repository, charger automatiquement la base de données
-        $oUserRepository = new UserRepository();
-//        $oUserRepository->init($this->getDatabase());
-
         if(isset($_POST)) {
 
-            // @todo : voir si on peut virer les paramètres des méthodes
-            //Validateur : si c'est valide
+            //Validateur : si le form est valide
             if($oValidation->isValid($_POST)) {
 
-                //@todo a effectuer en dehors du controller dans service register
-                //Nouvel enregistrement en base
-                $oUserRepository->createUser();
+                // Créer un nouvel utilisateur
+                $oService->newUser();
 
-                //@todo a effectuer en dehors du controller dans service register
-                //Envoi d'un mail a celui renseigné pour valider token
-                $oService->sendEmailConfirmation($_POST['email'], $_POST['token']);
-                
-                //Rend la vue si valide
+                // Rend la vue de confirmation si valide
                 $this->render(
                     [
                         'email' => $_POST['email'],
@@ -126,12 +119,11 @@ class MembersController extends AbstractController
                 );
             } else {
 
-                // Rend la vue si n'est pas valide
+                // Rend la vue Register si n'est pas valide avec les erreurs. Genere un token aléatoire
                 $this->render(
                     [
                         'errors' => $oValidation->getErrors(), // Pour afficher les erreurs
                         'token' => $oValidation->getToken(), // Récupère le token généré automatiquement
-                        'users' => $oUserRepository->getUsers(), // Liste des utilisateurs
                     ],
                     'modules/Members/src/Views/register.php'
                 );
@@ -170,8 +162,9 @@ class MembersController extends AbstractController
      */
     public function logoutAction()
     {
-        unset($_SESSION['email']);
-        //@todo: faire un session destroy pour la sécurité
-        $this->redirect('members', 'login');
+        // Unset l'utilisateur en cours
+        Session::delete('auth');
+        // Redirection sur l'index
+        $this->redirect('members');
     }
 }

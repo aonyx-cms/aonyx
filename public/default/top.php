@@ -30,7 +30,7 @@
             <h3 class="panel-title">Espace Membre</h3>
         </div>
         <div class="panel-body">
-            <?php if (!isset($_SESSION['email'])) { ?>
+            <?php if (!isset($_SESSION['auth'])) { ?>
             <form method="post" action="index.php?module=members&action=login">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Adresse email</label>
@@ -52,7 +52,7 @@
                 <li><a href="index.php?module=members&action=login">Se connecter</a></li>
             </ul>
             <?php } else { ?>
-            Bonjour <?php echo $_SESSION['email']; ?>
+            Bonjour <?php echo $_SESSION['auth']; ?>
                 <ul>
                     <li><a href="index.php?module=members&action=account">Espace membre</a></li>
                     <li><a href="index.php?module=members&action=logout">Se déconnecter</a></li>

@@ -34,7 +34,14 @@ abstract class AbstractController implements InterfaceController
         if(null == $module) {
             throw new \Exception('Redirect Error : no module specified !');
         }
-        header('location:index.php?module=' . $module . '&action=' . $action);
+
+        if (null != $action) {
+
+            header('location:index.php?module=' . $module . '&action=' . $action);
+        } else {
+
+            header('location:index.php?module=' . $module);
+        }
     }
 
     public function render(array $return = [], $path)
