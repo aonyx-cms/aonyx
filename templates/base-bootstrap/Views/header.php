@@ -13,14 +13,14 @@
 
     <!-- Bootstrap core CSS -->
     <link href="/templates/base-bootstrap/style/css/bootstrap.css" rel="stylesheet">
+    <link href="/templates/base-bootstrap/style/css/base-bootstrap.css" rel="stylesheet">
 </head>
 
 <body>
 <script src="/templates/base-bootstrap/style/js/jquery.js"></script>
 
+<?php include 'templates/base-bootstrap/Views/navbar.php'; ?>
 <div class="container">
-
-    <?php include 'templates/base-bootstrap/Views/navbar.php'; ?>
 
     <div class="col-md-3">
 
