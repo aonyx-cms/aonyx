@@ -1,9 +1,9 @@
 <?php
-namespace Modules\Members;
+namespace Modules\Application;
 
 class Autoloader {
 
-    const MODULE = 'Members';
+    const MODULE = 'Application';
 //todo : créer un abstract
 
     static function register(){

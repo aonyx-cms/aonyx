@@ -67,7 +67,7 @@
                 <h3 class="panel-title">Statistiques</h3>
             </div>
             <div class="panel-body">
-                Panel content
+                Ici se trouverons les stats de fréquentation (utilisateurs connectés et visiteurs).
             </div>
         </div>
     </div>
