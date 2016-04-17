@@ -4,7 +4,7 @@
         <h3 class="panel-title">Se connecter</h3>
     </div>
     <div class="panel-body">
-        <form method="post" action="index.php?module=members&action=login">
+        <form method="post">
             <div class="form-group">
                 <label for="email">Adresse Email</label>
                 <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Email" autofocus>

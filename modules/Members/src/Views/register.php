@@ -4,7 +4,7 @@
         <h3 class="panel-title">S'enregistrer</h3>
     </div>
     <div class="panel-body">
-        <form method="post" action="index.php?module=members&action=register">
+        <form method="post">
             <div class="form-group">
                 <label for="pseudo">Choisir un identifiant</label>
                 <input type="text" class="form-control" id="username" name="username" placeholder="Identifiant" autofocus>
@@ -45,7 +45,7 @@
             </div>
             <div class="form-group">
                 <label for="Captcha">Merci de recopier </label>
-                <img src="modules/Members/config/captcha.php" alt="" />
+                <img src="/modules/Members/config/captcha.php" alt="" />
                 <input type="text" class="form-control" id="captcha" name="captcha" placeholder="">
                 <?php
                 if(isset($return['errors']['captcha'])) {
@@ -59,5 +59,5 @@
     </div>
 </div>
 
-<script src="modules/Members/src/Views/js/register/validation.js"></script>
+<script src="/modules/Members/src/Views/js/register/validation.js"></script>
 <?php include_once 'templates/' . $config->getTemplate() . '/Views/footer.php'; ?>

@@ -43,7 +43,7 @@ class RegisterService
         mail(
             (null != $email ? $email : $_POST['email']),
             'Confirmation de votre compte',
-            'Afin de valider votre compte merci de cliquer sur ce lien ' . $_SERVER['HTTP_REFERER'] . 'index.php?module=members&action=confirm&token=' . (null != $token ? $token : $_POST['token'])
+            'Afin de valider votre compte merci de cliquer sur ce lien ' . $_SERVER['HTTP_REFERER'] . 'members/confirm/token=' . (null != $token ? $token : $_POST['token'])
         );
     }
 }

@@ -7,16 +7,16 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
+    <link rel="icon" href="/templates/base-bootstrap/favicon.ico">
 
     <title><?php echo $config->getNameSite(); ?></title>
 
     <!-- Bootstrap core CSS -->
-    <link href="templates/base-bootstrap/style/css/bootstrap.css" rel="stylesheet">
+    <link href="/templates/base-bootstrap/style/css/bootstrap.css" rel="stylesheet">
 </head>
 
 <body>
-<script src="templates/base-bootstrap/style/js/jquery.js"></script>
+<script src="/templates/base-bootstrap/style/js/jquery.js"></script>
 
 <div class="container">
 
@@ -31,7 +31,7 @@
             </div>
             <div class="panel-body">
                 <?php if (!isset($_SESSION['auth'])) { ?>
-                    <form method="post" action="index.php?module=members&action=login">
+                    <form method="post" action="<?php echo $config->referer(); ?>/members/login">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Adresse email</label>
                             <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Adresse email">
@@ -48,14 +48,14 @@
                         <button type="submit" class="btn btn-default">Connexion</button>
                     </form>
                     <ul>
-                        <li><a href="index.php?module=members&action=register">S'enregistrer</a></li>
-                        <li><a href="index.php?module=members&action=login">Se connecter</a></li>
+                        <li><a href="<?php echo $config->referer(); ?>/members/register">S'enregistrer</a></li>
+                        <li><a href="<?php echo $config->referer(); ?>/members/login">Se connecter</a></li>
                     </ul>
                 <?php } else { ?>
                     Bonjour <?php echo $_SESSION['auth']; ?>
                     <ul>
-                        <li><a href="index.php?module=members&action=account">Espace membre</a></li>
-                        <li><a href="index.php?module=members&action=logout">Se déconnecter</a></li>
+                        <li><a href="<?php echo $config->referer(); ?>/members/account">Espace membre</a></li>
+                        <li><a href="<?php echo $config->referer(); ?>/members/logout">Se déconnecter</a></li>
                     </ul>
                 <?php } ?>
             </div>

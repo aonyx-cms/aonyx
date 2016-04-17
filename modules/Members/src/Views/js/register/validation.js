@@ -36,7 +36,7 @@ jQuery(document).ready(function() {
      */
     jQuery('#username').focusout(function() {
 
-        _ajaxRequest('index.php?module=members&action=ajax_validation_username', 'POST', '#username', 'html', '#ajax-username');
+        _ajaxRequest('/members/ajax_validation_username', 'POST', '#username', 'html', '#ajax-username');
     });
 
     /**
@@ -45,7 +45,7 @@ jQuery(document).ready(function() {
      */
     jQuery('#email').focusout(function() {
 
-        _ajaxRequest('index.php?module=members&action=ajax_validation_email', 'POST', '#email', 'html', '#ajax-email');
+        _ajaxRequest('/members/ajax_validation_email', 'POST', '#email', 'html', '#ajax-email');
     });
 
 });

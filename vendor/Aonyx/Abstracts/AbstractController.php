@@ -38,10 +38,10 @@ abstract class AbstractController implements InterfaceController
 
         if (null != $action) {
 
-            header('location:index.php?module=' . $module . '&action=' . $action);
+            header('location:' . $action . '/');
         } else {
 
-            header('location:index.php?module=' . $module);
+            header('location:/' . $module . '/');
         }
     }
 

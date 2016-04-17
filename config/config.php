@@ -90,4 +90,10 @@ class Config
         return $this;
     }
 
+    public function referer()
+    {
+        //@todo : definir le protocol par défaut
+        return 'http://' . $_SERVER['HTTP_HOST'];
+    }
+
 }

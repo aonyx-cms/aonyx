@@ -24,14 +24,16 @@ include_once 'modules/Members/config/routing.php';
 if(isset($_GET['action'])) {
 
     // todo : créer une classe Aonyx pour gérer cela
-    if(!isset($routes[$_GET['action']])) {
+    if(!array_key_exists($_GET['action'],$routes)) {
         // todo : créer classe d'erreur Aonyx
-        echo '<div class="alert alert-danger" role="alert"><strong>404 Error :</strong> No route action</div>';
-        die;
-    }
+        header("HTTP/1.0 404 Not Found");
+        header( "refresh:5;url=/" );
+        echo '<div class="alert alert-danger" role="alert"><strong>404 Error :</strong> No route action</div><br />You\'ll be redirected in about 5 secs. If not, click <a href="index.php">here</a>.';
+    } else {
 
-    $call = new $routes[$_GET['action']]['namespace'];
-    $call->$routes[$_GET['action']]['action']();
+        $call = new $routes[$_GET['action']]['namespace'];
+        $call->$routes[$_GET['action']]['action']();
+    }
 
 } else {
 
