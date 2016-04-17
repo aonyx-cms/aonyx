@@ -38,7 +38,7 @@ abstract class AbstractController implements InterfaceController
 
         if (null != $action) {
 
-            header('location:' . $action . '/');
+            header('location:/' . $module . '/' . $action . '/');
         } else {
 
             header('location:/' . $module . '/');
@@ -82,6 +82,7 @@ abstract class AbstractController implements InterfaceController
         }
     }
 
+    //@todo: permettre de setters plusieurs services à la fois et boucler un include sur ces services
     public function setService(array $service, $select)
     {
         //todo: controlles

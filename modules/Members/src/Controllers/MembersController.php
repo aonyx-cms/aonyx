@@ -61,6 +61,12 @@ class MembersController extends AbstractController
         // Récupère le service de login
         $oSession = $this->getService();
 
+        // Si utilisateur connecté
+        if($oSession->isConnected()) {
+
+            $this->redirect('members', 'account'); // Redirection sur la page d'espace membre
+        }
+
         if(isset($_POST)) {
             // Si le form est valide
             if($oValidation->isValid($_POST)) {
@@ -101,6 +107,13 @@ class MembersController extends AbstractController
         // Récupère le service & la validation
         $oValidation = $this->getValidation();
         $oService = $this->getService();
+
+        // Si l'utilisateur est connecté
+        //@todo: dans l'attente de modif (set plusieurs services) dans l'abstract
+        if(Session::read('auth')) {
+
+            $this->redirect('members', 'account'); // Redirection sur la page d'espace membre
+        }
 
         if(isset($_POST)) {
 
