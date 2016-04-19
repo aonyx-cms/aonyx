@@ -32,7 +32,7 @@ class MembersController extends AbstractController
         // Récupère le service de login
         $oSession = $this->getService();
 
-        $oSession->isCookie();
+        $oSession->hasCookie();
 
         // Vérifie si l'utilisateur est connecté
         if($oSession->isConnected()) {
@@ -63,7 +63,7 @@ class MembersController extends AbstractController
         // Récupère le service de login
         $oSession = $this->getService();
 
-        $oSession->isCookie();
+        $oSession->hasCookie();
 
         // Si utilisateur connecté
         if($oSession->isConnected()) {
@@ -77,7 +77,7 @@ class MembersController extends AbstractController
             if($oValidation->isValid($_POST)) {
 
                 // Si se souvenir de moi est coché alors on crée un cookie
-                if($oSession->isRemember()) {
+                if($oSession->isRemembered()) {
 
                     $oSession->remember();
                 }

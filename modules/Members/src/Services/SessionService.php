@@ -128,7 +128,7 @@ class SessionService
      * Détermine si on a cocher la case Se souvenir de moi
      * @return bool
      */
-    public function isRemember() {
+    public function isRemembered() {
 
         $bReturn = false;
 
@@ -143,7 +143,7 @@ class SessionService
     /**
      * Détermine si le cookie existe
      */
-    public function isCookie() {
+    public function hasCookie() {
 
         // Si il existe un cookie et que l'utilisateur n'est pas connecté
         if(isset($_COOKIE['remember']) && !$this->isConnected()) {
