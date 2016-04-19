@@ -24,7 +24,7 @@ class DbManager
     public function update($table, $set, $where, $execute)
     {
         $requete = $this->db->prepare('UPDATE ' . $table . ' SET ' . $set . ' WHERE ' . $where .'');
-        $requete->execute(array($execute));
+        $requete->execute($execute);
 
         return $requete;
     }

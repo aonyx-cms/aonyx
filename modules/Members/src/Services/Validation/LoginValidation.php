@@ -40,8 +40,8 @@ class LoginValidation extends AbstractMembersValidation
             //@todo : supprimer les paramètres
             $this->requiredFields($this->_setRequiredFields($aData)); // Vérifie que tout les champs requis soit renseigné
             $this->validEmail($aData['email']); // Vérifie si le format d'email est valide
-            $this->isFetchEmail();
-            $this->isFetchPasswordMatching();
+            $this->isFetchEmail(); // Si l'email existe
+            $this->isFetchPasswordMatching(); // Si le password existe
 
             if(null == $this->getErrors()) {
                 return true;

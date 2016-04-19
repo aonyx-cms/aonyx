@@ -66,6 +66,14 @@ class UserRepository extends DbManager
      * @param null $specificPost
      * @return mixed
      */
+    public function fetchUserById($specificPost = null) {
+        return $this->fetch('*', 'users', 'id = (?)', (null != $specificPost ? $specificPost : $_POST['id']), 'Users');
+    }
+
+    /**
+     * @param null $specificPost
+     * @return mixed
+     */
     public function fetchUserByUsername($specificPost = null) {
         return $this->fetch('*', 'users', 'username = (?)', (null != $specificPost ? $specificPost : $_POST['username']), 'Users');
     }

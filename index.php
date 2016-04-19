@@ -30,9 +30,3 @@ $config->fetchConfigSite();
 use Config\Router;
 $page = new Router($config->getTemplate(), $modules);
 echo $page->body();
-
-
-
-
-
-

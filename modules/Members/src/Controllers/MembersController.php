@@ -32,6 +32,8 @@ class MembersController extends AbstractController
         // Récupère le service de login
         $oSession = $this->getService();
 
+        $oSession->isCookie();
+
         // Vérifie si l'utilisateur est connecté
         if($oSession->isConnected()) {
 
@@ -61,6 +63,8 @@ class MembersController extends AbstractController
         // Récupère le service de login
         $oSession = $this->getService();
 
+        $oSession->isCookie();
+
         // Si utilisateur connecté
         if($oSession->isConnected()) {
 
@@ -68,8 +72,16 @@ class MembersController extends AbstractController
         }
 
         if(isset($_POST)) {
+
             // Si le form est valide
             if($oValidation->isValid($_POST)) {
+
+                // Si se souvenir de moi est coché alors on crée un cookie
+                if($oSession->isRemember()) {
+
+                    $oSession->remember();
+                }
+
                 // On connecte l'utilisateur
                 $oSession->connect();
                 // Rend la vue de l'espace membre
@@ -175,8 +187,18 @@ class MembersController extends AbstractController
      */
     public function logoutAction()
     {
-        // Unset l'utilisateur en cours
-        Session::delete('auth');
+        // Charge le fichier de config services.config.php dans le dossier config de Members
+        $this->setConfig('services', 'Members');
+
+        // Set les services en question : ici le service SessionService
+        $this->setService($this->getConfig(), 'sessionService');
+
+        // Récupère le service de login
+        $oSession = $this->getService();
+
+        // Unset la session
+        $oSession->disconnect();
+
         // Redirection sur l'index
         $this->redirect('members');
     }
