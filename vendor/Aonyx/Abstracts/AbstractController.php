@@ -82,29 +82,19 @@ abstract class AbstractController implements InterfaceController
         }
     }
 
-    //@todo: permettre de setters plusieurs services à la fois et boucler un include sur ces services
-    public function setService(array $service, $select)
+    public function setServices(array $service, array $select)
     {
-        //todo: controlles
+
+        //todo: faire les controlles
+        foreach($select as $services) {
+            //@todo: vérifier si la clé src existe ou pas, si elle existe pas l'enlever du include,<br />
+            //@todo: pour ne pas être obligé de déclarer dans la config
             // Parcours le dossier pour trouver le service recherché
-            include_once 'modules/' . $service[$select]['module'] . '/src/Services/' . $service[$select]['class'] . '.php';
+            include_once 'modules/' . $service[$services]['module'] . '/src/Services/' . $service[$services]['src'] . $service[$services]['class'] . '.php';
             // Instancie le nouvel objet
-            $className = new $service[$select]['namespace'];
+            $this->_oService[$services] = new $service[$services]['namespace'];
+        }
 
-            $this->_oService = $className;
-            return $this;
-    }
-
-    public function setValidation(array $service, $select)
-    {
-        //todo: controlles
-        // Parcours le dossier pour trouver le service de validation recherché
-        include_once 'modules/' . $service[$select]['module'] . '/src/Services/Validation/' . $service[$select]['class'] . '.php';
-        // Instancie le nouvel objet
-        $className = new $service[$select]['namespace'];
-
-        $this->_oValidation = $className;
-        return $this;
     }
 
     public function setConfig($config, $module = null)
@@ -134,14 +124,9 @@ abstract class AbstractController implements InterfaceController
 
     }
 
-    public function getService()
+    public function getServices()
     {
         return $this->_oService;
-    }
-
-    public function getValidation()
-    {
-        return $this->_oValidation;
     }
 
     public function getServiceConfig()

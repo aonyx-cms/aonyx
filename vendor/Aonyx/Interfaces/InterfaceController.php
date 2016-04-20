@@ -14,7 +14,7 @@ interface InterfaceController
     public function render(array $return = [], $path);
 
     // Récupere les services qui effectue des actions pour les controllers
-    public function getService();
+    public function getServices();
 
     // Récupere les services globals
     public function getServiceConfig();
@@ -22,7 +22,7 @@ interface InterfaceController
     // Recupère les fichiers de configuration
     public function getConfig();
 
-    public function setService(array $service, $select);
+    public function setServices(array $service, array $select);
 
     public function setServiceConfig(array $options);
 

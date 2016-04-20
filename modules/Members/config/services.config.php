@@ -10,23 +10,27 @@ $config = [
     'registerValidation' => [
         'module' => 'Members',
         'class' => 'RegisterValidation',
-        'namespace' => 'Modules\Members\Services\RegisterValidation'
+        'namespace' => 'Modules\Members\Services\RegisterValidation',
+        'src' => 'Validation/'
     ],
     'loginValidation' => [
         'module' => 'Members',
         'class' => 'LoginValidation',
-        'namespace' => 'Modules\Members\Services\LoginValidation'
+        'namespace' => 'Modules\Members\Services\LoginValidation',
+        'src' => 'Validation/'
     ],
 
     //Services
     'sessionService' => [
         'module' => 'Members',
         'class' => 'SessionService',
-        'namespace' => 'Modules\Members\Services\SessionService'
+        'namespace' => 'Modules\Members\Services\SessionService',
+        'src' => null
     ],
     'registerService' => [
         'module' => 'Members',
         'class' => 'RegisterService',
-        'namespace' => 'Modules\Members\Services\RegisterService'
+        'namespace' => 'Modules\Members\Services\RegisterService',
+        'src' => null
     ]
 ];

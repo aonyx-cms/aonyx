@@ -27,10 +27,10 @@ class MembersController extends AbstractController
         $this->setConfig('services', 'Members');
 
         // Set les services en question : ici le service SessionService
-        $this->setService($this->getConfig(), 'sessionService');
+        $this->setServices($this->getConfig(), array('sessionService'));
 
         // Récupère le service de login
-        $oSession = $this->getService();
+        $oSession = $this->getServices()['sessionService'];
 
         $oSession->hasCookie();
 
@@ -54,14 +54,16 @@ class MembersController extends AbstractController
         $this->setConfig('services', 'Members');
 
         // Set les services en question
-        $this->setValidation($this->getConfig(), 'loginValidation');
-        $this->setService($this->getConfig(), 'sessionService');
+        $this->setServices($this->getConfig(), array(
+            'sessionService',
+            'loginValidation'
+        ));
 
         // Validation
-        $oValidation = $this->getValidation();
+        $oValidation = $this->getServices()['loginValidation'];
 
         // Récupère le service de login
-        $oSession = $this->getService();
+        $oSession = $this->getServices()['sessionService'];
 
         $oSession->hasCookie();
 
@@ -113,16 +115,19 @@ class MembersController extends AbstractController
         $this->setConfig('services', 'Members');
 
         // Set les services en question
-        $this->setValidation($this->getConfig(), 'registerValidation'); // Service de validation
-        $this->setService($this->getConfig(), 'registerService'); // Register Service
+        $this->setServices($this->getConfig(), array(
+            'registerService',
+            'sessionService',
+            'registerValidation'
+        ));
 
-        // Récupère le service & la validation
-        $oValidation = $this->getValidation();
-        $oService = $this->getService();
+        // Récupère les services
+        $oValidation = $this->getServices()['registerValidation']; // Validation
+        $oRegisterService = $this->getServices()['registerService']; // Service Register
+        $oSessionService = $this->getServices()['sessionService']; // Service Session
 
         // Si l'utilisateur est connecté
-        //@todo: dans l'attente de modif (set plusieurs services) dans l'abstract
-        if(Session::read('auth')) {
+        if($oSessionService->isConnected()) {
 
             $this->redirect('members', 'account'); // Redirection sur la page d'espace membre
         }
@@ -133,7 +138,7 @@ class MembersController extends AbstractController
             if($oValidation->isValid($_POST)) {
 
                 // Créer un nouvel utilisateur
-                $oService->newUser();
+                $oRegisterService->newUser();
 
                 // Rend la vue de confirmation si valide
                 $this->render(
@@ -191,10 +196,10 @@ class MembersController extends AbstractController
         $this->setConfig('services', 'Members');
 
         // Set les services en question : ici le service SessionService
-        $this->setService($this->getConfig(), 'sessionService');
+        $this->setServices($this->getConfig(), array('sessionService'));
 
         // Récupère le service de login
-        $oSession = $this->getService();
+        $oSession = $this->getServices()['sessionService'];
 
         // Unset la session
         $oSession->disconnect();
