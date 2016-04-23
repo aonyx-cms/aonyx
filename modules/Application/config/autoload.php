@@ -1,61 +1,40 @@
 <?php
 namespace Modules\Application;
 
-class Autoloader {
+use Aonyx\Core\AbstractAutoload;
+
+class Autoloader extends AbstractAutoload {
 
     const MODULE = 'Application';
-//todo : créer un abstract
+
+    const FOLDER_FACTORY = 'Factory';
+    const FOLDER_CONTROLLERS = 'Controllers';
+    const FOLDER_MODELS = 'Models';
 
     static function register(){
-        spl_autoload_register(array(__CLASS__, 'factory'));
-        spl_autoload_register(array(__CLASS__, 'models'));
-        spl_autoload_register(array(__CLASS__, 'controllers'));
-        // Essentials
-        spl_autoload_register(array(__CLASS__, 'aonyxEssentialsAbstracts'));
-        spl_autoload_register(array(__CLASS__, 'aonyxEssentialsInterface'));
-        spl_autoload_register(array(__CLASS__, 'aonyxEssentialsClasses'));
-    }
+        spl_autoload_register(array(__CLASS__, self::FUNCTION_FACTORY));
+        spl_autoload_register(array(__CLASS__, self::FUNCTION_MODELS));
+        spl_autoload_register(array(__CLASS__, self::FUNCTION_CONTROLLERS));
+        self::registerCoreAonyx();
 
+    }
 
     static function factory($class_name){
-        $class_name = str_replace('Modules\\' . self::MODULE . '\\Factory\\', '', $class_name);
-        if(file_exists('modules/' . self::MODULE . '/src/Factory/' . $class_name . '.php'))
-            require 'modules/' . self::MODULE . '/src/Factory/' . $class_name . '.php';
+        $class_name = str_replace('Modules\\' . self::MODULE . '\\' . self::FOLDER_FACTORY . '\\', '', $class_name);
+        if(file_exists('modules/' . self::MODULE . '/src/' . self::FOLDER_FACTORY . '/' . $class_name . '.php'))
+            require 'modules/' . self::MODULE . '/src/' . self::FOLDER_FACTORY . '/' . $class_name . '.php';
     }
-
 
     static function controllers($class_name){
-        $class_name = str_replace('Modules\\' . self::MODULE . '\\Controllers\\', '', $class_name);
-        if(file_exists('modules/' . self::MODULE . '/src/Controllers/' . $class_name . '.php'))
-            require 'modules/' . self::MODULE . '/src/Controllers/' . $class_name . '.php';
+        $class_name = str_replace('Modules\\' . self::MODULE . '\\' . self::FOLDER_CONTROLLERS . '\\', '', $class_name);
+        if(file_exists('modules/' . self::MODULE . '/src/' . self::FOLDER_CONTROLLERS . '/' . $class_name . '.php'))
+            require 'modules/' . self::MODULE . '/src/' . self::FOLDER_CONTROLLERS . '/' . $class_name . '.php';
     }
-
 
     static function models($class_name){
-        $class_name = str_replace('Modules\\' . self::MODULE . '\\Models\\', '', $class_name);
-        if(file_exists('modules/' . self::MODULE . '/src/Models/' . $class_name . '.php'))
-            require 'modules/' . self::MODULE . '/src/Models/' . $class_name . '.php';
-    }
-
-    /**
-     * Essentiels au bon fonctionnement du CMS
-     */
-    static function aonyxEssentialsAbstracts($class_name){
-        $class_name = str_replace('Aonyx\\Abstracts\\', '', $class_name);
-        if(file_exists('vendor/Aonyx/Abstracts/' . $class_name . '.php'))
-            require 'vendor/Aonyx/Abstracts/' . $class_name . '.php';
-    }
-
-    static function aonyxEssentialsInterface($class_name){
-        $class_name = str_replace('Aonyx\\Interfaces\\', '', $class_name);
-        if(file_exists('vendor/Aonyx/Interfaces/' . $class_name . '.php'))
-            require 'vendor/Aonyx/Interfaces/' . $class_name . '.php';
-    }
-
-    static function aonyxEssentialsClasses($class_name){
-        $class_name = str_replace('Aonyx\\Classes\\', '', $class_name);
-        if(file_exists('vendor/Aonyx/Classes/' . $class_name . '.php'))
-            require 'vendor/Aonyx/Classes/' . $class_name . '.php';
+        $class_name = str_replace('Modules\\' . self::MODULE . '\\' . self::FOLDER_MODELS . '\\', '', $class_name);
+        if(file_exists('modules/' . self::MODULE . '/src/' . self::FOLDER_MODELS . '/' . $class_name . '.php'))
+            require 'modules/' . self::MODULE . '/src/' . self::FOLDER_MODELS . '/' . $class_name . '.php';
     }
 
 }

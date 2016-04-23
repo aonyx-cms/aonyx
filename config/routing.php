@@ -6,7 +6,7 @@
  */
 
 /**
- * GET action
+ * GET modules
  */
 $modules = [
     'News' => '\Modules\News',

@@ -1,5 +1,7 @@
 <?php
 namespace Config;
+use Aonyx\Classes\Errors;
+
 /**
  * @author: galicher
  * Date: 17/03/16
@@ -52,6 +54,10 @@ class Config
         if (!empty($valeurs)) {
             $this->hydrate($valeurs);
         }
+
+        // Include classes
+        include_once 'vendor/Aonyx/Classes/Errors.php';
+
     }
 
     /**

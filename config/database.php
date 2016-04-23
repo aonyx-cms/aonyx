@@ -10,10 +10,12 @@ class Database
 
     public static function connect()
     {
-        //todo : fichier de config db externe de type array
-        $db = new \PDO('mysql:host=localhost;dbname=cms', 'root', 'root');
+        global $database;
+
+        $db = new \PDO('mysql:host=' . $database['host'] . ';dbname=' . $database['basename'], $database['username'], $database['password']);
         $db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 
         return $db;
     }
+
 }

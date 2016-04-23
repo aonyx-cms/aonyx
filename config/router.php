@@ -6,6 +6,7 @@
  */
 
 namespace Config;
+use Aonyx\Classes\Errors;
 
 /**
  * Class Router
@@ -41,9 +42,7 @@ class Router
             // si ça matche pas on renvoie une erreur 404 et on redirige
             if(!array_key_exists(ucfirst($_GET['module']),$this->_aRouting)) {
 
-                header("HTTP/1.0 404 Not Found");
-                header( "refresh:5;url=/" );
-                echo '<strong>404 :</strong> No route module match found. <br />You\'ll be redirected in about 5 secs. If not, click <a href="index.php">here</a>.';
+                Errors::noRouteModule();
             }
 
             // vérification de l'existence des modules

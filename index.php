@@ -14,13 +14,13 @@ use Config\Session;
 
 Autoloader::register();
 Session::getInstance();
-
 include_once "config/routing.php";
 
 /**
  * Config du site
  */
 use Config\Config;
+include_once "config/parameters.php";
 $config = new Config();
 $config->fetchConfigSite();
 
