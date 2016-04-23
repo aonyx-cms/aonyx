@@ -2,6 +2,7 @@
 namespace Aonyx\Abstracts;
 
 use Aonyx\Classes\DbManager;
+use Aonyx\Classes\Errors;
 use Aonyx\Interfaces\InterfaceController;
 use Config\Config;
 use Config\Database;
@@ -14,7 +15,6 @@ use Config\Database;
 
 abstract class AbstractController implements InterfaceController
 {
-    //@todo : constant pour les réponses
 
     protected $_oService;
     protected $_oServiceConfig;
@@ -22,29 +22,44 @@ abstract class AbstractController implements InterfaceController
     protected $_oManager;
     protected $_oValidation;
 
-    //@todo : commenter les méthodes
-
+    /**
+     * Récupère l'objet PDO
+     * et connecte la database avec les infos fournies
+     * @return \PDO
+     */
     public function getDatabase()
     {
         // Retourne l'objet PDO
         return Database::connect();
     }
 
+    /**
+     * Fonction pour rediriger vers une autre page
+     * @param $module
+     * @param null $action
+     */
     public function redirect($module, $action = null)
     {
         if(null == $module) {
-            throw new \Exception('Redirect Error : no module specified !');
-        }
 
-        if (null != $action) {
-
-            header('location:/' . $module . '/' . $action . '/');
+            Errors::exception('Redirect Error : no module specified !', get_class(), __LINE__, get_class($this));
         } else {
 
-            header('location:/' . $module . '/');
+            if (null != $action) {
+
+                header('location:/' . $module . '/' . $action . '/');
+            } else {
+
+                header('location:/' . $module . '/');
+            }
         }
     }
 
+    /**
+     * Affiche une vue avec des paramètres si il y'en a
+     * @param array $return
+     * @param $path
+     */
     public function render(array $return = [], $path)
     {
         // Transmission des variables à la vue
@@ -60,10 +75,17 @@ abstract class AbstractController implements InterfaceController
         if(file_exists($path)) {
             include_once $path;
         } else {
-            throw new \Exception('Render Error : ' . $path . ' n\'existe pas !');
+
+            Errors::exception('Render Error : ' . $path . ' doesn\'t exist', get_class(), __LINE__, get_class($this));
         }
     }
 
+    /**
+     * Set un service plus général a l'application
+     * @todo : à revoir
+     * @param array $options
+     * @return $this
+     */
     public function setServiceConfig(array $options)
     {
         foreach($options as $className => $methodAction) {
@@ -82,21 +104,44 @@ abstract class AbstractController implements InterfaceController
         }
     }
 
+    /**
+     * Set un ou des services pour une action
+     * @param array $service
+     * @param array $select
+     */
     public function setServices(array $service, array $select)
     {
 
-        //todo: faire les controlles
-        foreach($select as $services) {
-            //@todo: vérifier si la clé src existe ou pas, si elle existe pas l'enlever du include,<br />
-            //@todo: pour ne pas être obligé de déclarer dans la config
-            // Parcours le dossier pour trouver le service recherché
-            include_once 'modules/' . $service[$services]['module'] . '/src/Services/' . $service[$services]['src'] . $service[$services]['class'] . '.php';
-            // Instancie le nouvel objet
-            $this->_oService[$services] = new $service[$services]['namespace'];
+        if(empty($service)) {
+
+            Errors::exception('You have not specified a configuration file !', get_class(), __LINE__, get_class($this));
+        }
+
+        if(empty($select)) {
+
+            Errors::exception('You have not specified a service !', get_class(), __LINE__, get_class($this));
+        } else {
+
+            foreach($select as $services) {
+
+                // Parcours le dossier pour trouver le service recherché
+                include_once 'modules/' . $service[$services]['module'] . '/src/Services/' .
+                    (array_key_exists('src', $service[$services]) ? $service[$services]['src'] : null) .
+                    $service[$services]['class'] . '.php';
+
+                // Instancie le nouvel objet
+                $this->_oService[$services] = new $service[$services]['namespace'];
+            }
         }
 
     }
 
+    /**
+     * Pour setter un fichier de config d'un module ou non
+     * @param $config
+     * @param null $module
+     * @return $this
+     */
     public function setConfig($config, $module = null)
     {
         // si le module n'est pas égal à rien
@@ -124,6 +169,7 @@ abstract class AbstractController implements InterfaceController
 
     }
 
+    // GETTERS ...
     public function getServices()
     {
         return $this->_oService;

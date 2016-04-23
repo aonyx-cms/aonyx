@@ -8,6 +8,7 @@
 /**
  * Autoload
  */
+require_once 'vendor/Aonyx/Core/AbstractAutoload.php';
 require_once 'modules/News/config/autoload.php';
 \Modules\News\Autoloader::register();
 require_once 'config/database.php';
@@ -23,15 +24,16 @@ include_once 'modules/News/config/routing.php';
 
 if(isset($_GET['action'])) {
 
-    // todo : créer une classe Aonyx pour gérer cela
-    if(!isset($routes[$_GET['action']])) {
-        // todo : créer classe d'erreur Aonyx
-        echo '<div class="alert alert-danger" role="alert"><strong>404 Error :</strong> No route action</div>';
-        die;
-    }
+    if(!array_key_exists($_GET['action'],$routes)) {
 
-    $call = new $routes[$_GET['action']]['namespace'];
-    $call->$routes[$_GET['action']]['action']();
+        // Si l'action n'existe pas on bloque
+        \Aonyx\Classes\Errors::noRouteAction();
+    } else {
+
+        // Sinon on appelle l'action demandée
+        $call = new $routes[$_GET['action']]['namespace'];
+        $call->$routes[$_GET['action']]['action']();
+    }
 
 } else {
 

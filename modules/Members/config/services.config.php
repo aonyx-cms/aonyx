@@ -25,12 +25,10 @@ $config = [
         'module' => 'Members',
         'class' => 'SessionService',
         'namespace' => 'Modules\Members\Services\SessionService',
-        'src' => null
     ],
     'registerService' => [
         'module' => 'Members',
         'class' => 'RegisterService',
         'namespace' => 'Modules\Members\Services\RegisterService',
-        'src' => null
     ]
 ];
