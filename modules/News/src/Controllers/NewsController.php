@@ -11,6 +11,9 @@ use Aonyx\Abstracts\AbstractController;
 
 class NewsController extends AbstractController
 {
+    /**
+     * Affiche la liste des news
+     */
     public function indexAction()
     {
         $this->setConfig('services', 'News');
@@ -23,25 +26,68 @@ class NewsController extends AbstractController
 
         $this->render(
             [
-                'listNews' => $oNews->getListNews(),
-                'news' => $oNews->getNews(),
+                'news' => $oNews->getListNews(),
             ],
             'modules/News/src/Views/index.php'
         );
     }
 
-    //@todo : Pour l'admin créer un nouveau module (ATTENTION : crée le système de droits des utilisateurs (lien avec le module Members).
-//    public function adminAction()
-//    {
-//        $oNewsManager = new NewsRepository($this->getDatabase());
-//        $aNewsList = $oNewsManager->getList();
-//
-//        $this->render(
-//            [
-//                'manager' => $oNewsManager,
-//                'newsList' => $aNewsList,
-//            ],
-//            'modules/News/src/Views/admin.php'
-//        );
-//    }
+    /**
+     * Afficher une news en particulier
+     */
+    public function showAction()
+    {
+        $this->setConfig('services', 'News');
+
+        $this->setServices($this->getConfig(), array(
+            'newsService',
+        ));
+
+        $oNews = $this->getServices()['newsService'];
+
+        if (isset($_GET['id'])) {
+
+            if($oNews->getNews()) {
+
+                $this->render(
+                    [
+                        'news' => $oNews->getNews(),
+                    ],
+                    'modules/News/src/Views/show.php'
+                );
+            } else {
+
+                $this->redirect('news');
+            }
+
+        } else {
+
+            $this->redirect('news');
+        }
+    }
+
+    /**
+     * Editer une news
+     */
+    public function editAction()
+    {
+        // ... Concevoir les droits utilisateurs & l'admin
+    }
+
+    /**
+     * Créer une news
+     */
+    public function createAction()
+    {
+        // ... Concevoir les droits utilisateurs & l'admin
+    }
+
+    /**
+     * Supprimer une news
+     */
+    public function deleteAction()
+    {
+        // ... Concevoir les droits utilisateurs & l'admin
+    }
+
 }

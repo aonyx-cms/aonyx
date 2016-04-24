@@ -8,7 +8,7 @@ namespace Modules\News\Models;
  */
 class NewsEntity
 {
-
+    //@todo SEPARER LA VALIDATION
     protected $erreurs = [];
     protected $id;
     protected $auteur;
@@ -113,7 +113,7 @@ class NewsEntity
     /**
      * @return mixed
      */
-    public function getAuteur()
+    public function getUser()
     {
         return $this->auteur;
     }
@@ -122,7 +122,7 @@ class NewsEntity
      * @param mixed $auteur
      * @return News
      */
-    public function setAuteur($auteur)
+    public function setUser($auteur)
     {
         $this->auteur = $auteur;
         return $this;

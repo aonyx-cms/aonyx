@@ -9,13 +9,13 @@
  * GET action
  */
 $routes = [
-    'index' => ['namespace' => '\Modules\News\Controllers\NewsController', 'action' => 'indexAction'],
-    'admin' => ['namespace' => '\Modules\News\Controllers\NewsController', 'action' => 'adminAction']
+    'index' => [
+        'namespace' => '\Modules\News\Controllers\NewsController',
+        'action' => 'indexAction'
+    ],
+    'show' => [
+        'namespace' => '\Modules\News\Controllers\NewsController',
+        'action' => 'showAction'
+    ],
 ];
 
-/**
- * GET "autre chose"
- */
-$childRoutes = [
-
-];

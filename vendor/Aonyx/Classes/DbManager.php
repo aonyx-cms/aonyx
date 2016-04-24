@@ -46,6 +46,17 @@ class DbManager
         return $requete->fetch();
     }
 
+    //Jointure
+    public function leftJoin($select, $from, $on, $where = null, $execute, $fetchMode)
+    {
+        $requete = $this->db->prepare('SELECT ' . $select . ' FROM ' . $from . ' ON ' . $on . ' ' . (null != $where ? 'WHERE ' . $where : null));
+        $requete->execute($execute);
+
+        $requete->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, $fetchMode);
+
+        return $requete->fetch();
+    }
+
     // Récupérer plusieurs données
     public function fetchAll($select, $from, $params = null, $start = null, $limit = null, $fetchMode)
     {

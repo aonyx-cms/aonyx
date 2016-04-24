@@ -35,7 +35,7 @@ class NewsService
 
     public function getNews()
     {
-        return $this->_oNewsRepository->getNews((int) (isset($_GET['id']) ? $_GET['id'] : null));
+        return $this->_oNewsRepository->getNewsByAuthor((int) (isset($_GET['id']) ? $_GET['id'] : null));
     }
 
 

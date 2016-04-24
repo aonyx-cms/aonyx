@@ -33,7 +33,7 @@ class NewsRepository extends DbManager
     {
         return $this->insert("news", "'', (?), (?), (?), NOW(), NOW()", array(
             null,
-            $news->getAuteur(),
+            $news->getUser(),
             $news->getTitre(),
             $news->getContenu(),
         ));
@@ -61,15 +61,23 @@ class NewsRepository extends DbManager
      */
     public function getListNews($debut = -1, $limite = -1)
     {
-        return $this->fetchAll('id, auteur, titre, contenu, dateAjout, dateModif', 'news', 'ORDER BY id DESC', $debut, $limite, 'News');
+        return $this->fetchAll('id, id_user, titre, contenu, dateAjout, dateModif', 'news', 'ORDER BY id DESC', $debut, $limite, 'News');
     }
 
     /**
-     * @param $id
+     * @param $id_news
+     * @return mixed
      */
-    public function getNews($id)
+    public function getNewsByAuthor($id_news)
     {
-        return $this->fetch('id, auteur, titre, contenu, dateAjout, dateModif', 'news', 'id = (?)', array((int) $id,), 'News');
+        // exemple de jointure pour la news 4 :
+        // SELECT * FROM users LEFT JOIN news ON news.id_user = users.id WHERE news.id = 4
+
+        return $this->leftJoin('*', 'users LEFT JOIN news', 'news.id_user = users.id', 'news.id = (?)',
+            array(
+                $id_news
+            ),
+        'News');
     }
 
     /**
@@ -77,9 +85,9 @@ class NewsRepository extends DbManager
      */
     protected function updateNews(NewsEntity $news)
     {
-        return $this->update('news', 'auteur = (?), titre = (?), contenu = (?), dateModif = (?)', 'id = (?)',
+        return $this->update('news', 'id_user = (?), titre = (?), contenu = (?), dateModif = (?)', 'id = (?)',
             array(
-                $news->getAuteur(),
+                $news->getUser(),
                 $news->getTitre(),
                 $news->getContenu(),
                 new \DateTime(),
