@@ -1,5 +1,5 @@
 <?php include_once 'templates/' . $config->getTemplate() . '/Views/header.php'; ?>
-<div class="col-md-12" id="middle">
+<div class="col-md-9" id="middle">
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title">Aonyx CMS System</h3>
@@ -10,4 +10,7 @@
         </div>
     </div>
 </div>
-<?php include_once 'templates/' . $config->getTemplate() . '/Views/footer.php'; ?>
+<?php
+include_once 'templates/' . $config->getTemplate() . '/Views/rightmenu.php';
+include_once 'templates/' . $config->getTemplate() . '/Views/footer.php';
+?>
