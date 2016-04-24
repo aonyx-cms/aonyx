@@ -68,7 +68,7 @@ class NewsRepository extends DbManager
      * @param $id_news
      * @return mixed
      */
-    public function getNewsByAuthor($id_news)
+    public function getNewsById($id_news)
     {
         // exemple de jointure pour la news 4 :
         // SELECT * FROM users LEFT JOIN news ON news.id_user = users.id WHERE news.id = 4
