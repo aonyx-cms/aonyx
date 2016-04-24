@@ -10,12 +10,3 @@ Si vous souhaitez contribuer, merci d'apporter une critique constructive ! le bu
 
 Installation
 -------------
-
-Pour le moment juste un **git clone**
-
-> **Note:**
-
-> Config de la connexion à la base de données dans : **config/database.php**
-> Schéma de la base de données : **cms.sql**
-
-#### 
