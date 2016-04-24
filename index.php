@@ -17,6 +17,15 @@ Session::getInstance();
 include_once "config/routing.php";
 
 /**
+ * Vérifie si parameters.php existe
+ * Sinon lance l'installation
+ */
+if (!file_exists('config/parameters.php')) {
+
+    header('location:install/index.php');
+}
+
+/**
  * Config du site
  */
 use Config\Config;
