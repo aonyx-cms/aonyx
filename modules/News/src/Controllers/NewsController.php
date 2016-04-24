@@ -8,39 +8,40 @@
 namespace Modules\News\Controllers;
 
 use Aonyx\Abstracts\AbstractController;
-use Modules\News\Models\NewsRepository;
 
 class NewsController extends AbstractController
 {
     public function indexAction()
     {
-        //todo : pas de repo dans le controller, faire un service
-        $oNewsManager = new NewsRepository($this->getDatabase());
+        $this->setConfig('services', 'News');
 
-        $listNews = $oNewsManager->getList(0, 5);
-        $news = $oNewsManager->getUnique((int) (isset($_GET['id']) ? $_GET['id'] : null));
+        $this->setServices($this->getConfig(), array(
+            'newsService',
+        ));
+
+        $oNews = $this->getServices()['newsService'];
 
         $this->render(
             [
-                'listNews' => $listNews,
-                'news' => $news
+                'listNews' => $oNews->getListNews(),
+                'news' => $oNews->getNews(),
             ],
             'modules/News/src/Views/index.php'
         );
     }
 
-    public function adminAction()
-    {
-        //todo : pas de repo dans le controller, faire un service
-        $oNewsManager = new NewsRepository($this->getDatabase());
-        $aNewsList = $oNewsManager->getList();
-
-        $this->render(
-            [
-                'manager' => $oNewsManager,
-                'newsList' => $aNewsList,
-            ],
-            'modules/News/src/Views/admin.php'
-        );
-    }
+    //@todo : Pour l'admin créer un nouveau module (ATTENTION : crée le système de droits des utilisateurs (lien avec le module Members).
+//    public function adminAction()
+//    {
+//        $oNewsManager = new NewsRepository($this->getDatabase());
+//        $aNewsList = $oNewsManager->getList();
+//
+//        $this->render(
+//            [
+//                'manager' => $oNewsManager,
+//                'newsList' => $aNewsList,
+//            ],
+//            'modules/News/src/Views/admin.php'
+//        );
+//    }
 }

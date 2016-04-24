@@ -39,7 +39,7 @@ class DbManager
     public function fetch($select, $from, $where, $execute, $fetchMode)
     {
         $requete = $this->db->prepare('SELECT ' . $select . ' FROM ' . $from . ' WHERE ' . $where . '');
-        $requete->execute(array($execute));
+        $requete->execute($execute);
 
         $requete->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, $fetchMode);
 
@@ -49,7 +49,7 @@ class DbManager
     // Récupérer plusieurs données
     public function fetchAll($select, $from, $params = null, $start = null, $limit = null, $fetchMode)
     {
-        $sql = 'SELECT ' . $select . ' FROM ' . $from . $params;
+        $sql = 'SELECT ' . $select . ' FROM ' . $from . ' ' . $params;
 
         if(null != $start && null != $limit)
         {

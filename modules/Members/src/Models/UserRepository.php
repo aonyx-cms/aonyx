@@ -59,7 +59,7 @@ class UserRepository extends DbManager
      * @return mixed
      */
     public function fetchUserByEmail($specificPost = null) {
-        return $this->fetch('*', 'users', 'email = (?)', (null != $specificPost ? $specificPost : $_POST['email']), 'Users');
+        return $this->fetch('*', 'users', 'email = (?)', array((null != $specificPost ? $specificPost : $_POST['email'])), 'Users');
     }
 
     /**
@@ -67,7 +67,7 @@ class UserRepository extends DbManager
      * @return mixed
      */
     public function fetchUserById($specificPost = null) {
-        return $this->fetch('*', 'users', 'id = (?)', (null != $specificPost ? $specificPost : $_POST['id']), 'Users');
+        return $this->fetch('*', 'users', 'id = (?)', array((null != $specificPost ? $specificPost : $_POST['id'])), 'Users');
     }
 
     /**
@@ -75,6 +75,6 @@ class UserRepository extends DbManager
      * @return mixed
      */
     public function fetchUserByUsername($specificPost = null) {
-        return $this->fetch('*', 'users', 'username = (?)', (null != $specificPost ? $specificPost : $_POST['username']), 'Users');
+        return $this->fetch('*', 'users', 'username = (?)', array((null != $specificPost ? $specificPost : $_POST['username'])), 'Users');
     }
 }

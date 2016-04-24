@@ -64,7 +64,8 @@ abstract class AbstractController implements InterfaceController
     {
         // Transmission des variables à la vue
         foreach($return as $variableOut => $variableIn) {
-            ${$variableOut} = $variableIn;
+
+            ${$variableOut} = (object) $variableIn;
         }
 
         // Configurations générales du site
@@ -106,31 +107,31 @@ abstract class AbstractController implements InterfaceController
 
     /**
      * Set un ou des services pour une action
-     * @param array $service
-     * @param array $select
+     * @param array $config
+     * @param array $servicesList
      */
-    public function setServices(array $service, array $select)
+    public function setServices(array $config, array $servicesList)
     {
 
-        if(empty($service)) {
+        if(empty($config)) {
 
             Errors::exception('You have not specified a configuration file !', get_class(), __LINE__, get_class($this));
         }
 
-        if(empty($select)) {
+        if(empty($servicesList)) {
 
             Errors::exception('You have not specified a service !', get_class(), __LINE__, get_class($this));
         } else {
 
-            foreach($select as $services) {
+            foreach($servicesList as $services) {
 
                 // Parcours le dossier pour trouver le service recherché
-                include_once 'modules/' . $service[$services]['module'] . '/src/Services/' .
-                    (array_key_exists('src', $service[$services]) ? $service[$services]['src'] : null) .
-                    $service[$services]['class'] . '.php';
+                include_once 'modules/' . $config[$services]['module'] . '/src/Services/' .
+                    (array_key_exists('src', $config[$services]) ? $config[$services]['src'] : null) .
+                    $config[$services]['class'] . '.php';
 
                 // Instancie le nouvel objet
-                $this->_oService[$services] = new $service[$services]['namespace'];
+                $this->_oService[$services] = new $config[$services]['namespace'];
             }
         }
 

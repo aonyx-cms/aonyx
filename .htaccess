@@ -5,4 +5,4 @@ RewriteCond %{REQUEST_FILENAME} -f
 RewriteRule .* - [S=3] #Nombre de règles à vérifier ci-dessous
 RewriteRule ^([\w-]+)/?$                    index.php?module=$1 [L,QSA]
 RewriteRule ^([\w-]+)/([\w-]+)/?$           index.php?module=$1&action=$2 [L,QSA]
-#RewriteRule ^([\w-]+)/([\w-]+)/([\w-]+)/?$  index.php?module=$1&action=$2&autre_action=$3 [L,QSA]
+RewriteRule ^([\w-]+)/([\w-]+)/([\w-]+)/?$  index.php?module=$1&action=$2&id=$3 [L,QSA]
