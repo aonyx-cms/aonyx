@@ -32,7 +32,7 @@ if(isset($_GET['action'])) {
 
         // Sinon on appelle l'action demandée
         $call = new $routes[$_GET['action']]['namespace'];
-        $call->$routes[$_GET['action']]['action']();
+        $call->{$routes[$_GET['action']]['action']}();
     }
 
 } else {
