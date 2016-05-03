@@ -4,13 +4,16 @@
  * Date: 13/03/16
  * Time: 14:02
  */
+use Config\Autoloader;
+use Config\Session;
+use Config\Config;
+use Config\Router;
 
 /**
  * Pile d'autoload
  */
 include_once "config/autoload.php";
-use Config\Autoloader;
-use Config\Session;
+
 
 Autoloader::register();
 Session::getInstance();
@@ -28,7 +31,6 @@ if (!file_exists('config/parameters.php')) {
 /**
  * Config du site
  */
-use Config\Config;
 include_once "config/parameters.php";
 $config = new Config();
 $config->fetchConfigSite();
@@ -36,6 +38,5 @@ $config->fetchConfigSite();
 /**
  * Construction du site
  */
-use Config\Router;
 $page = new Router($config->getTemplate(), $modules);
 echo $page->body();
