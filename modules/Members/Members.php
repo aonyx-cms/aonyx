@@ -30,9 +30,17 @@ if(isset($_GET['child'])) {
         \Aonyx\Classes\Errors::noRouteAction();
     } else {
 
-        // Sinon on appelle l'action demandée
+        // Sinon on appelle le child demandée
         $call = new $routes[$_GET['child']]['namespace'];
-        $call->{$routes[$_GET['child']]['action']}();
+
+        // Si une action existe
+        if (isset($_GET['action'])) {
+
+            $call->{$routes[$_GET['child'].'/'.$_GET['action']]['action']}();
+        } else {
+
+            $call->{$routes[$_GET['child']]['action']}();
+        }
     }
 
 } else {

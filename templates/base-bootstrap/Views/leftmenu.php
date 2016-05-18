@@ -6,7 +6,7 @@
             <h3 class="panel-title">Espace Membre</h3>
         </div>
         <div class="panel-body">
-            <?php if (!isset($_SESSION['auth'])) { ?>
+            <?php if (!\Config\Session::read('auth')): ?>
                 <form method="post" action="<?php echo $config->referer(); ?>/members/login">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Adresse email</label>
@@ -27,17 +27,17 @@
                     <li><a href="<?php echo $config->referer(); ?>/members/register">S'enregistrer</a></li>
                     <li><a href="<?php echo $config->referer(); ?>/members/login">Se connecter</a></li>
                 </ul>
-            <?php } else { ?>
-                Bonjour <?php echo $_SESSION['auth']; ?>
+            <?php else: ?>
+                Bonjour <?php echo \Config\Session::read('auth_username'); ?>
                 <ul>
-                    <li><a href="<?php echo $config->referer(); ?>/members/profile/show/<?php echo $_SESSION['auth_id']; ?>">Profil</a></li>
+                    <li><a href="<?php echo $config->referer(); ?>/members/profile/show/<?php echo \Config\Session::read('auth_id'); ?>">Profil</a></li>
                     <li><a href="<?php echo $config->referer(); ?>/members/memberlist">Liste des membres</a></li>
                     <li><a href="<?php echo $config->referer(); ?>/members/messages">Messages</a></li>
                     <li><a href="<?php echo $config->referer(); ?>/members/friends">Ami(e)s</a></li>
                     <li><a href="<?php echo $config->referer(); ?>/members/account">Espace membre</a></li>
                     <li><a href="<?php echo $config->referer(); ?>/members/logout">Se déconnecter</a></li>
                 </ul>
-            <?php } ?>
+            <?php endif; ?>
         </div>
     </div>
 

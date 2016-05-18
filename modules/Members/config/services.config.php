@@ -30,5 +30,10 @@ $config = [
         'module' => 'Members',
         'class' => 'RegisterService',
         'namespace' => 'Modules\Members\Services\RegisterService',
+    ],
+    'profileService' => [
+        'module' => 'Members',
+        'class' => 'ProfileService',
+        'namespace' => 'Modules\Members\Services\ProfileService',
     ]
 ];

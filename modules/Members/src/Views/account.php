@@ -8,9 +8,9 @@ include_once 'templates/' . $config->getTemplate() . '/Views/leftmenu.php';
             <h3 class="panel-title">Espace membre</h3>
         </div>
         <div class="panel-body">
-            Bonjour <strong><?php echo $_SESSION['auth']; ?></strong> !
+            Bonjour <strong><?php echo \Config\Session::read('auth_username'); ?></strong> !
             <div class="col-sm-12">
-                <div class="col-sm-4"><a href="<?php echo $config->referer(); ?>/members/profile/edit/<?php echo $_SESSION['auth_id']; ?>">Modifier mon profil</a></div>
+                <div class="col-sm-4"><a href="<?php echo $config->referer(); ?>/members/profile/edit/<?php echo \Config\Session::read('auth_id'); ?>">Modifier mon profil</a></div>
                 <div class="col-sm-4"><a href="<?php echo $config->referer(); ?>/members/messages">Messagerie interne</a></div>
                 <div class="col-sm-4"><a href="<?php echo $config->referer(); ?>/members/friends">Ma liste d'ami(e)s</a></div>
             </div>

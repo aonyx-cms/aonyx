@@ -8,7 +8,7 @@
                 <a class="aonyx-nav-item" href="<?php echo $config->referer(); ?>/members/register">S'enregistrer</a>
             <?php } else { ?>
                 <a class="aonyx-nav-item" href="<?php echo $config->referer(); ?>/members/account">Mon compte</a>
-                <a class="aonyx-nav-item" href="<?php echo $config->referer(); ?>/members/logout">Déconnexion [ <strong><?php echo \Config\Session::read('auth') ?></strong> ]</a>
+                <a class="aonyx-nav-item" href="<?php echo $config->referer(); ?>/members/logout">Déconnexion [ <strong><?php echo \Config\Session::read('auth_username') ?></strong> ]</a>
             <?php } ?>
         </nav>
     </div>

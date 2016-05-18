@@ -26,11 +26,21 @@ if(isset($_GET['child'])) {
 
     if(!array_key_exists($_GET['child'],$routes)) {
 
+        // Si l'action n'existe pas on bloque
         \Aonyx\Classes\Errors::noRouteAction();
     } else {
 
+        // Sinon on appelle le child demandée
         $call = new $routes[$_GET['child']]['namespace'];
-        $call->{$routes[$_GET['child']]['action']}();
+
+        // Si une action existe
+        if (isset($_GET['action'])) {
+
+            $call->{$routes[$_GET['child'].'/'.$_GET['action']]['action']}();
+        } else {
+
+            $call->{$routes[$_GET['child']]['action']}();
+        }
     }
 
 } else {
