@@ -22,15 +22,15 @@ include_once 'modules/Application/config/routing.php';
  * On appelle suivant le GET l'action du controller
  */
 
-if(isset($_GET['action'])) {
+if(isset($_GET['child'])) {
 
-    if(!array_key_exists($_GET['action'],$routes)) {
+    if(!array_key_exists($_GET['child'],$routes)) {
 
         \Aonyx\Classes\Errors::noRouteAction();
     } else {
 
-        $call = new $routes[$_GET['action']]['namespace'];
-        $call->{$routes[$_GET['action']]['action']}();
+        $call = new $routes[$_GET['child']]['namespace'];
+        $call->{$routes[$_GET['child']]['action']}();
     }
 
 } else {

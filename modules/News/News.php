@@ -22,17 +22,17 @@ include_once 'modules/News/config/routing.php';
  * On appelle suivant le GET l'action du controller
  */
 
-if(isset($_GET['action'])) {
+if(isset($_GET['child'])) {
 
-    if(!array_key_exists($_GET['action'],$routes)) {
+    if(!array_key_exists($_GET['child'],$routes)) {
 
         // Si l'action n'existe pas on bloque
         \Aonyx\Classes\Errors::noRouteAction();
     } else {
 
         // Sinon on appelle l'action demandée
-        $call = new $routes[$_GET['action']]['namespace'];
-        $call->{$routes[$_GET['action']]['action']}();
+        $call = new $routes[$_GET['child']]['namespace'];
+        $call->{$routes[$_GET['child']]['action']}();
     }
 
 } else {

@@ -2,7 +2,8 @@ RewriteEngine On
 
 RewriteCond %{REQUEST_FILENAME} -d [OR]
 RewriteCond %{REQUEST_FILENAME} -f
-RewriteRule .* - [S=3] #Nombre de règles à vérifier ci-dessous
-RewriteRule ^([\w-]+)/?$                    index.php?module=$1 [L,QSA]
-RewriteRule ^([\w-]+)/([\w-]+)/?$           index.php?module=$1&action=$2 [L,QSA]
-RewriteRule ^([\w-]+)/([\w-]+)/([\w-]+)/?$  index.php?module=$1&action=$2&id=$3 [L,QSA]
+RewriteRule .* - [S=4] #Nombre de règles à vérifier ci-dessous
+RewriteRule ^([\w-]+)/?$                                index.php?module=$1 [L,QSA]
+RewriteRule ^([\w-]+)/([\w-]+)/?$                       index.php?module=$1&child=$2 [L,QSA]
+RewriteRule ^([\w-]+)/([\w-]+)/([\w-]+)/?$              index.php?module=$1&child=$2&action=$3 [L,QSA]
+RewriteRule ^([\w-]+)/([\w-]+)/([\w-]+)/([\w-]+)/?$     index.php?module=$1&child=$2&action=$3&id=$4 [L,QSA]

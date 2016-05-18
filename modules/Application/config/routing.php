@@ -10,13 +10,16 @@
  */
 $routes = [
     /**
-     * Routes d'actions du modules Members
+     * Routes d'actions du modules Application
      */
-    // For example : module name
+    // Home ...
     'index' => [
-        // namespace
         'namespace' => '\Modules\Application\Controllers\HomeController',
-        // function
+        'action' => 'indexAction'
+    ],
+    // Stats ...
+    'stats' => [
+        'namespace' => '\Modules\Application\Controllers\StatistiquesController',
         'action' => 'indexAction'
     ],
 

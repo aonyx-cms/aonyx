@@ -30,6 +30,10 @@
             <?php } else { ?>
                 Bonjour <?php echo $_SESSION['auth']; ?>
                 <ul>
+                    <li><a href="<?php echo $config->referer(); ?>/members/profile/show/<?php echo $_SESSION['auth_id']; ?>">Profil</a></li>
+                    <li><a href="<?php echo $config->referer(); ?>/members/memberlist">Liste des membres</a></li>
+                    <li><a href="<?php echo $config->referer(); ?>/members/messages">Messages</a></li>
+                    <li><a href="<?php echo $config->referer(); ?>/members/friends">Ami(e)s</a></li>
                     <li><a href="<?php echo $config->referer(); ?>/members/account">Espace membre</a></li>
                     <li><a href="<?php echo $config->referer(); ?>/members/logout">Se déconnecter</a></li>
                 </ul>

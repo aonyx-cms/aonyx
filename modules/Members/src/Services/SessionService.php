@@ -36,6 +36,7 @@ class SessionService
 
             //Set
             Session::write('auth', $_POST['email']);
+            Session::write('auth_id', $aUser['id']);
             Session::write('auth_username', $aUser['username']);
             Session::write('auth_email', $aUser['email']);
             Session::write('auth_date_creation', $aUser['date_creation']);
@@ -49,6 +50,7 @@ class SessionService
 
             //Set
             Session::write('auth', $specificPost['email']);
+            Session::write('auth_id', $specificPost['id']);
             Session::write('auth_username', $specificPost['username']);
             Session::write('auth_email', $specificPost['email']);
             Session::write('auth_date_creation', $specificPost['date_creation']);

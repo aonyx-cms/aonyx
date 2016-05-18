@@ -12,11 +12,9 @@ $routes = [
     /**
      * Routes d'actions du modules Members
      */
-    // For example : module name
+    // Members Controller ....
     'index' => [
-        // namespace
         'namespace' => '\Modules\Members\Controllers\MembersController',
-        // function
         'action' => 'indexAction'
     ],
     'login' => [
@@ -39,7 +37,35 @@ $routes = [
         'namespace' => '\Modules\Members\Controllers\MembersController',
         'action' => 'accountAction'
     ],
-
+    // Profile Controller ....
+    'profile' => [
+        'namespace' => '\Modules\Members\Controllers\ProfileController',
+        'action' => 'indexAction'
+    ],
+    'profile/show' => [
+        'namespace' => '\Modules\Members\Controllers\ProfileController',
+        'action' => 'showAction'
+    ],
+    'profile/edit' => [
+        'namespace' => '\Modules\Members\Controllers\ProfileController',
+        'action' => 'editAction'
+    ],
+    // Memberlist Controller ....
+    'memberlist' => [
+        'namespace' => '\Modules\Members\Controllers\MemberlistController',
+        'action' => 'indexAction'
+    ],
+    // Friends Controller ....
+    'friends' => [
+        'namespace' => '\Modules\Members\Controllers\FriendsController',
+        'action' => 'indexAction'
+    ],
+    // Messaging Controller ....
+    'messages' => [
+        'namespace' => '\Modules\Members\Controllers\MessagingController',
+        'action' => 'indexAction'
+    ],
+    
     /**
      * Routes des controllers Ajax
      */

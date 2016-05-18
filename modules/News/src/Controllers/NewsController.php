@@ -45,7 +45,8 @@ class NewsController extends AbstractController
 
         $oNews = $this->getServices()['newsService'];
 
-        if (isset($_GET['id'])) {
+        //@todo provisoire
+        if (isset($_GET['action'])) {
 
             if($oNews->getNews()) {
 

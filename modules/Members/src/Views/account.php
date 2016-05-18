@@ -9,6 +9,16 @@ include_once 'templates/' . $config->getTemplate() . '/Views/leftmenu.php';
         </div>
         <div class="panel-body">
             Bonjour <strong><?php echo $_SESSION['auth']; ?></strong> !
+            <div class="col-sm-12">
+                <div class="col-sm-4"><a href="<?php echo $config->referer(); ?>/members/profile/edit/<?php echo $_SESSION['auth_id']; ?>">Modifier mon profil</a></div>
+                <div class="col-sm-4"><a href="<?php echo $config->referer(); ?>/members/messages">Messagerie interne</a></div>
+                <div class="col-sm-4"><a href="<?php echo $config->referer(); ?>/members/friends">Ma liste d'ami(e)s</a></div>
+            </div>
+            <div class="col-sm-12">
+                <div class="col-sm-4"></div>
+                <div class="col-sm-4"></div>
+                <div class="col-sm-4"><a href="<?php echo $config->referer(); ?>/members/logout">Déconnexion</a></div>
+            </div>
         </div>
     </div>
 </div>

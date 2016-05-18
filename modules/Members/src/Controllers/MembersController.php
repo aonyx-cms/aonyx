@@ -180,6 +180,20 @@ class MembersController extends AbstractController
      */
     public function accountAction()
     {
+
+        $this->setConfig('services', 'Members');
+
+        $this->setServices($this->getConfig(), array(
+            'sessionService'
+        ));
+
+        $oSessionService = $this->getServices()['sessionService']; // Service Session
+
+        if(!$oSessionService->isConnected()) {
+
+            $this->redirect('members');
+        }
+
         $this->render(
             [],
             'modules/Members/src/Views/account.php'
