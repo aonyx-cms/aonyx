@@ -10,6 +10,8 @@ namespace Modules\Members\Controllers;
 
 
 use Aonyx\Abstracts\AbstractController;
+use Modules\Members\Models\ProfileEntity;
+use Modules\Members\Models\UserEntity;
 
 class ProfileController extends AbstractController
 {
@@ -58,10 +60,19 @@ class ProfileController extends AbstractController
 
             $this->redirect('members');
         }
-        var_dump($oProfile->getProfileUser());
 
+//        var_dump($oProfile->getProfileUser());
+        
+        $oUserEntity = new UserEntity($oProfile->getProfileUser());
+        $oProfileEntity = new ProfileEntity($oProfile->getProfileUser());
+        
         // Affiche la vue
-        $this->render([], 'modules/Members/src/Views/profile/index.php');
+        $this->render([
+            'user' => $oUserEntity,
+            'profile' => $oProfileEntity
+        ], 
+            'modules/Members/src/Views/profile/index.php'
+        );
 
     }
 

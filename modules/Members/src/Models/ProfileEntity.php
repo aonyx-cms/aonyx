@@ -21,7 +21,7 @@ class ProfileEntity
     protected $_sTemplate = null;
     protected $_sFirstName = null;
     protected $_sLastName = null;
-    protected $_sNationnality = null;
+    protected $_sNationality = null;
     protected $_sAvatar = null;
     protected $_sSignature = null;
     protected $_iRightsLevel = null;
@@ -51,7 +51,18 @@ class ProfileEntity
     {
         foreach ($donnees as $attribut => $valeur)
         {
-            $methode = 'set' . ucfirst($attribut);
+
+            // Si il trouve un underscore on sépare les valeurs dans des tableaux
+            $aChar = explode('_', $attribut);
+
+            // Array map pour insérer la fonction Ucfirst à chaque value
+            $aCharUcfirst = array_map('ucfirst', $aChar);
+
+            // Assemble le tableau
+            $attribut = implode($aCharUcfirst);
+
+            // Ecrit le nom de la méthode
+            $methode = 'set' . $attribut;
 
             if (is_callable([$this, $methode])) {
                 $this->$methode($valeur);
@@ -122,8 +133,8 @@ class ProfileEntity
     }
 
     /**
-     * @param null $sLastName
-     * @return ProfileEntity
+     * @param $sLastName
+     * @return $this
      */
     public function setLastName($sLastName)
     {
@@ -134,18 +145,18 @@ class ProfileEntity
     /**
      * @return null
      */
-    public function getNationnality()
+    public function getNationality()
     {
-        return $this->_sNationnality;
+        return $this->_sNationality;
     }
 
     /**
-     * @param null $sNationnality
-     * @return ProfileEntity
+     * @param $sNationality
+     * @return $this
      */
-    public function setNationnality($sNationnality)
+    public function setNationality($sNationality)
     {
-        $this->_sNationnality = $sNationnality;
+        $this->_sNationality = $sNationality;
         return $this;
     }
 
