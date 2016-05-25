@@ -56,7 +56,7 @@ class Config
         }
 
         // Include classes
-        include_once 'vendor/Aonyx/Classes/Errors.php';
+        include_once 'vendor/aonyx-cms/aonyx-core/Classes/Errors.php';
 
     }
 

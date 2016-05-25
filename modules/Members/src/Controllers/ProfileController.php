@@ -31,18 +31,38 @@ class ProfileController extends AbstractController
             $this->redirect('members');
         }
 
-//        die('dans le index, la route est '. $_GET['child']);
         $this->render([], 'modules/Members/src/Views/profile/index.php');
     }
     
     public function editAction() {
-        
+
+        $this->setConfig('services', 'Members');
+
+        $this->setServices($this->getConfig(), array(
+            'profileService'
+        ));
+
+        $oProfile = $this->getServices()['profileService'];
+
         // 3 sous action
         // - Edition infos profil
         // - Edition avatar et signature
         // - Edition de mot de passe
+
+        // Retourne la vue d'édition du profil
+        $oUserEntity = new UserEntity($oProfile->getProfileUser());
+        $oProfileEntity = new ProfileEntity($oProfile->getProfileUser());
+
+        // Affiche la vue
+        $this->render([
+            'user' => $oUserEntity,
+            'profile' => $oProfileEntity
+        ],
+
+            'modules/Members/src/Views/profile/edit.php'
+        );
     }
-    
+
     public function showAction() {
 
         //todo: prendre en compte un show sans id de renseigné
@@ -61,8 +81,6 @@ class ProfileController extends AbstractController
             $this->redirect('members');
         }
 
-//        var_dump($oProfile->getProfileUser());
-        
         $oUserEntity = new UserEntity($oProfile->getProfileUser());
         $oProfileEntity = new ProfileEntity($oProfile->getProfileUser());
         
@@ -73,20 +91,6 @@ class ProfileController extends AbstractController
         ], 
             'modules/Members/src/Views/profile/index.php'
         );
-
-    }
-
-    // .... Les sous-actions du edit
-
-    public function profileEditAction() {
-
-    }
-
-    public function imagesEditAction() {
-
-    }
-
-    public function passwordEditAction() {
 
     }
     

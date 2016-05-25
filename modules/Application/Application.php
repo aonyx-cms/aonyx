@@ -8,7 +8,7 @@
 /**
  * Autoload
  */
-require_once 'vendor/Aonyx/Core/AbstractAutoload.php';
+require_once 'vendor/aonyx-cms/aonyx-core/Core/AbstractAutoload.php';
 require_once 'modules/Application/config/autoload.php';
 \Modules\Application\Autoloader::register();
 require_once 'config/database.php';

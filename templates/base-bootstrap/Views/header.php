@@ -14,6 +14,12 @@
     <!-- Bootstrap core CSS -->
     <link href="/templates/base-bootstrap/style/css/bootstrap.css" rel="stylesheet">
     <link href="/templates/base-bootstrap/style/css/base-bootstrap.css" rel="stylesheet">
+    <script src="/vendor/tinymce/tinymce/tinymce.min.js"></script>
+    <script type="text/javascript">
+        tinymce.init({
+            selector: '#tinymce'
+        });
+    </script>
 </head>
 
 <body>
