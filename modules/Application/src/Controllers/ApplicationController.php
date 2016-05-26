@@ -9,7 +9,7 @@ namespace Modules\Application\Controllers;
 
 use Aonyx\Abstracts\AbstractController;
 
-class HomeController extends AbstractController
+class ApplicationController extends AbstractController
 {
     public function indexAction() {
 

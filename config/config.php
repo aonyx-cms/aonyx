@@ -55,6 +55,11 @@ class Config
             $this->hydrate($valeurs);
         }
 
+        if (!file_exists('vendor/aonyx-cms/aonyx-core/Classes/Application.php')) {
+
+            echo 'Les dépendances de Aonyx ne sont pas installés.<br /> Installez <a href="https://getcomposer.org/" target="_blank">composer</a> et effectuez un <strong>php composer.phar install</strong>';
+            exit;
+        }
         // Include classes
         include_once 'vendor/aonyx-cms/aonyx-core/Classes/Errors.php';
 

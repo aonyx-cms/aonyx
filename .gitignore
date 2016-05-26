@@ -1,7 +1,6 @@
 .idea/
 vendor/*
 !vendor/aonyx-cms-dev
-composer.json
 composer.lock
 composer.phar
 todolist.php
