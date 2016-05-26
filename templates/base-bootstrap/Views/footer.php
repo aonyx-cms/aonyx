@@ -1,10 +1,1 @@
-</div> <!-- /container -->
-
-<div class="footer"></div>
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="/templates/base-bootstrap/style/js/bootstrap.js"></script>
-
-</body>
-</html>
+<div class="aonyx-powered"><?php echo $config->AonyxPowered(); ?></div>

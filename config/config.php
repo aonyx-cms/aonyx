@@ -106,5 +106,10 @@ class Config
         //@todo : definir le protocol par défaut
         return 'http://' . $_SERVER['HTTP_HOST'];
     }
+    
+    public function AonyxPowered()
+    {
+        return '<a href="http://www.aonyx.fr/" target="_blank">Powered by Aonyx CMS &copy; 2016, Creative Commons BY NC SA.</a>';
+    }
 
 }

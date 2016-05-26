@@ -61,8 +61,16 @@ body {
     position:fixed;
     left:0px;
     bottom:0px;
-    height:200px;
+    height:30px;
     width:100%;
     background:#999;
     opacity: 0.9;
+}
+
+.aonyx-powered a, .aonyx-powered a:hover {
+    position: relative;
+    display: inline-block;
+    padding: 5px;
+    font-weight: 500;
+    color: #ffffff;
 }
