@@ -14,7 +14,7 @@
 // @todo: possibilités d'interaction des membres sur les News poster des commentaires etc...
 // @todo: installer grunt pour le front
 //....
-
+//
 
 /**
  * ARCHITECTURE
