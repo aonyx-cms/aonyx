@@ -8,6 +8,6 @@
 $database = array(
     'host' => 'localhost',
     'username' => 'root',
-    'password' => 'root',
+    'password' => '',
     'basename' => 'cms',
 );
