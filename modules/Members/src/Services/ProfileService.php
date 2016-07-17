@@ -32,6 +32,15 @@ class ProfileService
     }
 
     /**
+     * Récupère tout les utilisateurs
+     * @return mixed
+     */
+    public function getUsers() {
+    
+        return $this->_oProfileRepository->fetchAllUsers();
+    }
+    
+    /**
      * Fetch le profil de l'utilisateur
      * @return mixed
      */

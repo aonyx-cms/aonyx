@@ -31,8 +31,15 @@ class ProfileRepository extends DbManager
         $this->_oDb = Database::connect();
         $this->setDb($this->_oDb);
     }
+    
+    public function fetchAllUsers() 
+    {
+
+        return $this->fetchAll('*', 'users LEFT JOIN users_profile', ' ON users_profile.id_user = users.id', null, null, 'UserProfile');
+    }
 
     /**
+     * Fait une jointure du user et son profil
      * @param $id_user
      * @return mixed
      */

@@ -153,7 +153,7 @@ class ProfileController extends AbstractController
 
         // Recup infos (service)
         $oProfile = $this->getServices()['profileService'];
-
+        
         // Vérifie qu'on a un profil, que le GET ne soit pas null
         if (!$oProfile->hasProfile()) {
 
