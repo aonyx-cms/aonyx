@@ -35,22 +35,38 @@ class ProfileController extends AbstractController
     }
     
     public function editAction() {
-
+        
         $this->setConfig('services', 'Members');
 
         $this->setServices($this->getConfig(), array(
-            'profileService'
+            'profileService',
+            'sessionService'
         ));
-
-        $oProfile = $this->getServices()['profileService'];
-
-        // 3 sous action
-        // - Edition infos profil
-        // - Edition avatar et signature
-        // - Edition de mot de passe
+        
+        $oProfile = $this->getServices()['profileService']; // Service du profil
+        $oSession = $this->getServices()['sessionService']; // Service de la session
+        
+        // Vérifie que l'utilisateur soit connecté sinon on le redirige au début
+        if (!$oSession->isConnected()) {
+            
+            $this->redirect('members');
+        }
+        
+        // Vérifie si on édite bien le profile de l'utilisateur qui est connecté
+        // sinon on le redirige sur la zone membre
+        if (!$oProfile->isUser()) {
+            
+            $this->redirect('members');
+        }
 
         // Retourne la vue d'édition du profil
         $oUserEntity = new UserEntity($oProfile->getProfileUser());
+        
+        if (!$oUserEntity) {
+            
+            $this->redirect('account');
+        }
+        
         $oProfileEntity = new ProfileEntity($oProfile->getProfileUser());
 
         // Affiche la vue
@@ -62,11 +78,73 @@ class ProfileController extends AbstractController
             'modules/Members/src/Views/profile/edit.php'
         );
     }
+    
+    public function passwordAction() {
+        
+        $this->setConfig('services', 'Members');
+
+        $this->setServices($this->getConfig(), array(
+            'profileService',
+            'sessionService'
+        ));
+
+        $oProfile = $this->getServices()['profileService']; // Service du profil
+        $oSession = $this->getServices()['sessionService']; // Service de la session
+
+        // Vérifie que l'utilisateur soit connecté sinon on le redirige au début
+        if (!$oSession->isConnected()) {
+
+            $this->redirect('members');
+        }
+
+        // Vérifie si on édite bien le profile de l'utilisateur qui est connecté
+        // sinon on le redirige sur la zone membre
+        if (!$oProfile->isUser()) {
+
+            $this->redirect('members');
+        }
+        
+        $this->render([
+            
+        ],
+            'modules/Members/src/Views/profile/password.php'
+        );
+    }
+    
+    public function imageAction() {
+
+        $this->setConfig('services', 'Members');
+
+        $this->setServices($this->getConfig(), array(
+            'profileService',
+            'sessionService'
+        ));
+
+        $oProfile = $this->getServices()['profileService']; // Service du profil
+        $oSession = $this->getServices()['sessionService']; // Service de la session
+
+        // Vérifie que l'utilisateur soit connecté sinon on le redirige au début
+        if (!$oSession->isConnected()) {
+
+            $this->redirect('members');
+        }
+
+        // Vérifie si on édite bien le profile de l'utilisateur qui est connecté
+        // sinon on le redirige sur la zone membre
+        if (!$oProfile->isUser()) {
+
+            $this->redirect('members');
+        }
+        
+        $this->render([
+            
+        ],
+            'modules/Members/src/Views/profile/image.php'
+        );
+    }
 
     public function showAction() {
 
-        //todo: prendre en compte un show sans id de renseigné
-        
         $this->setConfig('services', 'Members');
 
         $this->setServices($this->getConfig(), array(
@@ -76,11 +154,20 @@ class ProfileController extends AbstractController
         // Recup infos (service)
         $oProfile = $this->getServices()['profileService'];
 
+        // Vérifie qu'on a un profil, que le GET ne soit pas null
         if (!$oProfile->hasProfile()) {
 
             $this->redirect('members');
         }
 
+        // Vérifie que l'utilisateur qu'on séléctionne avec le GET est bien existant
+        if (!$oProfile->getProfileUser()) {
+
+            $this->redirect('members');
+        }
+
+        // Récupère les infos de l'utilisateur selectionné
+        // 2 entity, car pour avoir les infos complètes
         $oUserEntity = new UserEntity($oProfile->getProfileUser());
         $oProfileEntity = new ProfileEntity($oProfile->getProfileUser());
         

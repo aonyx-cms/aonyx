@@ -8,6 +8,7 @@
 
 namespace Modules\Members\Services;
 
+use Config\Session;
 use Modules\Members\Models\ProfileRepository;
 
 /**
@@ -31,25 +32,43 @@ class ProfileService
     }
 
     /**
+     * Fetch le profil de l'utilisateur
      * @return mixed
      */
     public function getProfileUser() {
-        
+
         return $this->_oProfileRepository->fetchProfileUser($_GET['id']);
+    }
+    
+    /**
+     * Vérifie qu'il est bien l'utilisateur connecté
+     * @return bool
+     */
+    public function isUser() {
+
+        $bReturn = false;
+
+        if (Session::read('auth_id') == $_GET['id']) {
+
+            $bReturn = true;
+        }
+
+        return $bReturn;
     }
 
     /**
+     * Vérifie qu'on a un profil
      * @return bool
      */
     public function hasProfile() {
-        
-        $bReturn = false; 
-        
+
+        $bReturn = false;
+
         if(isset($_GET['id'])) {
-            
+
             $bReturn = true;
         }
-        
+
         return $bReturn;
     }
 

@@ -50,6 +50,14 @@ $routes = [
         'namespace' => '\Modules\Members\Controllers\ProfileController',
         'action' => 'editAction'
     ],
+    'profile/image' => [
+        'namespace' => '\Modules\Members\Controllers\ProfileController',
+        'action' => 'imageAction'
+    ],
+    'profile/password' => [
+        'namespace' => '\Modules\Members\Controllers\ProfileController',
+        'action' => 'passwordAction'
+    ],
     // Memberlist Controller ....
     'memberlist' => [
         'namespace' => '\Modules\Members\Controllers\MemberlistController',
