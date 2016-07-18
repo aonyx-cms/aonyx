@@ -26,7 +26,9 @@
             </div>
         </div>
     </div>
-<?php
-include_once 'templates/' . $config->getTemplate() . '/Views/rightmenu.php';
-include_once 'templates/' . $config->getTemplate() . '/Views/footer.php';
-?>
+    <?php include_once 'templates/' . $config->getTemplate() . '/Views/rightmenu.php'; ?>
+</div> <!-- /container -->
+<div class="footer"><?php include_once 'templates/' . $config->getTemplate() . '/Views/footer.php'; ?></div>
+<?php include_once 'templates/' . $config->getTemplate() . '/Views/javascripts_global.php'; ?>
+</body>
+</html>

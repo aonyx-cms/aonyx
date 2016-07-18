@@ -9,11 +9,12 @@
  * GET action
  */
 $routes = [
+    // News Controller .....
     'index' => [
         'namespace' => '\Modules\News\Controllers\NewsController',
         'action' => 'indexAction'
     ],
-    'show' => [
+    'index/show' => [
         'namespace' => '\Modules\News\Controllers\NewsController',
         'action' => 'showAction'
     ],

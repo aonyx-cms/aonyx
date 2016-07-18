@@ -13,7 +13,9 @@ use Modules\News\Autoloader;
  */
 require_once 'vendor/aonyx-cms/aonyx-core/Core/AbstractAutoload.php';
 require_once 'modules/News/config/autoload.php';
+
 Autoloader::register();
+
 require_once 'config/database.php';
 
 /**

@@ -43,27 +43,21 @@ class NewsController extends AbstractController
             'newsService',
         ));
 
+        // Service des news
         $oNews = $this->getServices()['newsService'];
 
-        //@todo provisoire
-        if (isset($_GET['action'])) {
+        // Si l'id existe on récupère la news
+        if($oNews->getNews()) {
 
-            if($oNews->getNews()) {
-
-                $this->render(
-                    [
-                        'news' => $oNews->getNews(),
-                    ],
+            $this->render(
+                 [
+                    'news' => $oNews->getNews(),
+                 ],
                     'modules/News/src/Views/show.php'
-                );
-            } else {
-
-                $this->redirect('news');
-            }
-
+            );
         } else {
 
-            $this->redirect('news');
+            $this->redirect('news'); // sinon on redirect vers la liste
         }
     }
 
