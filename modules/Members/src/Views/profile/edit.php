@@ -59,6 +59,10 @@
                         Signature : <textarea id="signature"><?php echo $profile->getSignature(); ?></textarea>
                     </div>
                 </div>
+                <div class="col-sm-12">
+                    <div class="col-sm-6 boutton-account"><a href="#"><div class="image-float"><img src="<?php echo '/templates/' . $config->getTemplate() . '/style/images/system/navigation/appliquer.png'; ?>" border="0" alt="" /></div> Modifier</a></div>
+                    <div class="col-sm-6 boutton-account"><a href="<?php echo $config->referer(); ?>/members/account"><div class="image-float"><img src="<?php echo '/templates/' . $config->getTemplate() . '/style/images/system/navigation/retour.png'; ?>" border="0" alt="" /></div> Retour</a></div>
+                </div>
             </div>
         </div>
     </div>

@@ -52,6 +52,25 @@ body {
     color: #0f0f0f;
 }
 
+/*********************/
+/*   MEMBERS MODULE  */
+/*********************/
+
+/* todo : mettre le prefix aonyx */
+
+.image-float {
+    margin: 5px;
+    text-decoration: none;
+}
+
+.boutton-account {
+    padding: 5px;
+    text-align: center;
+}
+
+.boutton-account a:hover {
+    text-decoration: none;
+}
 
 /***************/
 /*   FOOTER    */
