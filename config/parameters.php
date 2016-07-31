@@ -5,9 +5,10 @@
  * Time: 19:52
  */
 
-$database = array(
+$database_dev = array(
     'host' => 'localhost',
     'username' => 'root',
     'password' => '',
     'basename' => 'cms',
 );
+

@@ -10,10 +10,28 @@ class Database
 
     public static function connect()
     {
-        global $database;
+        $db = null;
+        
+        if(getenv('ENVIRONMENT') == 'prod') {
 
-        $db = new \PDO('mysql:host=' . $database['host'] . ';dbname=' . $database['basename'], $database['username'], $database['password']);
-        $db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+            global $database_prod;
+
+            $db = new \PDO('mysql:host=' . $database_prod['host'] . ';dbname=' . $database_prod['basename'], $database_prod['username'], $database_prod['password']);
+            $db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+        }
+
+        if(getenv('ENVIRONMENT') == 'dev') {
+
+            global $database_dev;
+
+            $db = new \PDO('mysql:host=' . $database_dev['host'] . ';dbname=' . $database_dev['basename'], $database_dev['username'], $database_dev['password']);
+            $db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+        }
+
+        if(null == getenv('ENVIRONMENT')) {
+
+            die('La variable d\'environnement n\'est pas définie !');
+        }
 
         return $db;
     }
